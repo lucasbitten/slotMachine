@@ -2,7 +2,6 @@
 #include <ctime>
 #include "GLM/gtx/string_cast.hpp"
 #include <algorithm>
-#include "TileComparators.h"
 #include <iomanip>
 
 
@@ -50,7 +49,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 			if (m_pRenderer != nullptr) // render init success
 			{
 				std::cout << "renderer creation success" << std::endl;
-				SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255);
+				SDL_SetRenderDrawColor(m_pRenderer, 0, 0, 0, 255);
 			}
 			else
 			{
@@ -200,7 +199,7 @@ void Game::handleEvents()
 	m_currentScene->handleEvents();
 
 	SDL_Event event;
-	if (SDL_PollEvent(&event))
+	while (SDL_PollEvent(&event))
 	{
 		switch (event.type)
 		{

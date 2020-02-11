@@ -109,7 +109,15 @@ bool CollisionManager::AABBCheckPlayer(Player* player, GameObject* object2)
 	float P1height = player->getHeight();
 	float P2width = object2->getWidth();
 	float P2height = object2->getHeight();
-	P2.x = P2.x - (P2width / 2);
+
+	if(P2.x < P1.x)
+	{
+		P2.x = P2.x - (P2width / 2);
+	} else
+	{
+		P2.x = P2.x + (P2width / 2);
+	}
+	
 
 	if (
 		P1.x < P2.x + P2width &&

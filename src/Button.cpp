@@ -66,6 +66,7 @@ bool Button::m_mouseOver()
 	else
 	{
 		m_alpha = 255;
+		m_mouseButtonClicked = false;
 		return false;
 	}
 }

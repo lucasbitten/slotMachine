@@ -3,8 +3,8 @@
 #include <ctime>
 #include "GLM/gtx/string_cast.hpp"
 #include <algorithm>
-#include "TileComparators.h"
 #include <iomanip>
+#include "StartButton.h"
 
 StartScene::StartScene()
 {
@@ -38,7 +38,7 @@ void StartScene::clean()
 void StartScene::handleEvents()
 {
 	SDL_Event event;
-	if (SDL_PollEvent(&event))
+	while (SDL_PollEvent(&event))
 	{
 		switch (event.type)
 		{
@@ -57,7 +57,7 @@ void StartScene::handleEvents()
 			switch (event.button.button)
 			{
 			case SDL_BUTTON_LEFT:
-				TheGame::Instance()->changeSceneState(SceneState::LEVEL1_SCENE);
+				
 				m_pStartButton->setMouseButtonClicked(true);
 				break;
 			}
@@ -80,9 +80,7 @@ void StartScene::handleEvents()
 			case SDLK_1:
 				TheGame::Instance()->changeSceneState(SceneState::LEVEL1_SCENE);
 				break;
-			case SDLK_2:
-				TheGame::Instance()->changeSceneState(SceneState::END_SCENE);
-				break;
+
 			}
 			break;
 
@@ -96,9 +94,12 @@ void StartScene::handleEvents()
 void StartScene::start()
 {
 	m_pStartButton = new StartButton();
-	SDL_Color blue = { 0, 0, 255, 255 };
-	m_pStartLabel = new Label("Royal Rush", "Consolas", 40, blue, glm::vec2(400.0f, 40.0f));
+	
+	SDL_Color color = { 230, 200, 0, 255 };
+	m_pStartLabel = new Label("Slot Machine Game", "Casino", 80, color, glm::vec2(Config::SCREEN_WIDTH*0.5f, 150.0f));
 	m_pStartLabel->setParent(this);
+	m_pStartButton->setParent(this);
+	addChild(m_pStartButton);
 	addChild(m_pStartLabel);
 }
 
