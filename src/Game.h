@@ -18,7 +18,6 @@
 // Game Managers
 #include "Config.h"
 #include "TextureManager.h"
-#include "CollisionManager.h"
 #include "Util.h"
 
 // Scenes
@@ -63,6 +62,9 @@ public:
 	void setFrames(Uint32 frames);
 	Uint32 getFrames();
 
+	void setDeltaTime(Uint32 time);
+	Uint32 getDeltaTime();
+
 	void changeSceneState(SceneState newState);
 	void quit();
 
@@ -84,6 +86,7 @@ private:
 	glm::vec2 m_mousePosition;
 
 	Uint32 m_frames;
+	Uint32 m_deltaTime;
 
 	Scene* m_currentScene;
 	SceneState m_currentSceneState;

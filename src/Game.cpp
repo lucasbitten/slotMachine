@@ -10,16 +10,15 @@ Game* Game::s_pInstance = 0;
 // Game functions - DO NOT REMOVE ***********************************************
 
 Game::Game() :
-	m_pWindow(NULL), m_pRenderer(NULL), m_currentFrame(0), m_currentScene(NULL), m_bRunning(true), m_currentSceneState(SceneState::NO_SCENE), m_frames(0)
+	m_pWindow(nullptr), m_pRenderer(nullptr), m_currentFrame(0), m_bRunning(true), m_frames(0), m_deltaTime(0), m_currentScene(nullptr), m_currentSceneState(SceneState::NO_SCENE)
 {
-	srand((unsigned)time(NULL));  // random seed
+	srand(unsigned(time(NULL)));  // random seed
 
 	
 }
 
 Game::~Game()
-{
-}
+= default;
 
 
 bool Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
@@ -117,6 +116,16 @@ void Game::setFrames(Uint32 frames)
 Uint32 Game::getFrames()
 {
 	return m_frames;
+}
+
+void Game::setDeltaTime(Uint32 time)
+{
+	m_deltaTime = time;
+}
+
+Uint32 Game::getDeltaTime()
+{
+	return m_deltaTime;
 }
 
 void Game::changeSceneState(SceneState newState)

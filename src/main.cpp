@@ -27,6 +27,12 @@
 const int FPS = 60;
 const int DELAY_TIME = 1000.0f / FPS;
 
+//TODO: mudar as imagens sorteadas
+//TODO: mensagem de erro se nao tiver dinheiro pra aposta
+//TODO:(?) botao pra zerar valor
+//TODO: mostrar mensagem de jackpot
+//TODO: 
+
 int main(int argc, char * args[])
 {
 	Uint32 frameStart, frameTime;
@@ -38,7 +44,7 @@ int main(int argc, char * args[])
 	freopen("CON", "w", stdout);
 
 
-	TheGame::Instance()->init("Slot Machine Game", 100, 100, 800, 600, false);
+	TheGame::Instance()->init("Slot Machine Game", 100, 100, Config::SCREEN_WIDTH, Config::SCREEN_HEIGHT, false);
 
 	// The main Game Loop
 	while (TheGame::Instance()->running())
@@ -52,9 +58,12 @@ int main(int argc, char * args[])
 
 		// Frame Limiter
 		frameTime = SDL_GetTicks() - frameStart;
+
 		if (frameTime< DELAY_TIME)
 		{
-			SDL_Delay((int)(DELAY_TIME - frameTime));
+			const auto time = int(DELAY_TIME - frameTime);
+			SDL_Delay(time);
+			TheGame::Instance()->setDeltaTime(time * 0.001);
 		}
 
 		frames++;

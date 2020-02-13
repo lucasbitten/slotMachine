@@ -97,11 +97,14 @@ void Level1Scene::m_updateUI()
 	ImGui::Begin(&windowString[0], NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_MenuBar);
 
 	// set window to top left corner
-	ImGui::SetWindowPos(ImVec2(0, 0), true);
+	ImGui::SetWindowPos(ImVec2(300, 200), true);
 
 	/*************************************************************************************************/
 	/* MENU                                                                                          */
 	/*************************************************************************************************/
+
+	static int i0 = 123;
+	ImGui::InputInt("Player bet: ", &i0);
 
 	if (ImGui::BeginMenuBar())
 	{
@@ -137,17 +140,16 @@ void Level1Scene::m_updateUI()
 
 	/*************************************************************************************************/
 
-	if (ImGui::Button("Restart Game"))
-	{
-		GameManager::Instance()->resetGame();
-	}
+	
+	//if (ImGui::Button("Restart Game"))
+	//{
+	//	GameManager::Instance()->resetGame();
+	//}
 
-	ImGui::SameLine();
-	ImGui::PushItemWidth(80);
+	//ImGui::SameLine();
+	//ImGui::PushItemWidth(80);
 
 
-	static int i0 = 123;
-	ImGui::InputInt("Player bet: ", &i0);
 
 
 
@@ -166,23 +168,26 @@ void Level1Scene::start()
 	{
 		ImGui::NewFrame();
 	}
+	m_pBackground = new Background();
 
+	m_pInfoLabel = new InfoLabel();
+	m_pInfoLabel->setPosition(glm::vec2(Config::SCREEN_WIDTH * 0.5f, 560));
 	
 	// allocates memory on the heap for this game object
 	m_pSlotMachine = new SlotMachine();
-	m_pSlotMachine->setPosition(glm::vec2(400, 150));
+	m_pSlotMachine->setPosition(glm::vec2(400, 250));
 	m_pPlayButton = new PlayButton();
-	m_pPlayButton->setPosition(glm::vec2(650.0f, 450.0f));
+	m_pPlayButton->setPosition(glm::vec2(520, 450));
 
-	SDL_Color color = { 255, 255, 255, 255 };
+	SDL_Color color = { 255, 0, 0, 255 };
 	
-	m_pJackPotLabel = new Label("Jackpot: " + std::to_string(GameManager::Instance()->jackpot), "Anton-Regular", 20, color, glm::vec2(100,350));
-	m_pPlayerMoneyLabel = new Label("Money: " + std::to_string(GameManager::Instance()->playerMoney), "Anton-Regular", 20, color, glm::vec2(300, 350));
-	m_pTurnLabel = new Label("Turn: " + std::to_string(GameManager::Instance()->turn), "Anton-Regular", 20, color, glm::vec2(500, 350));
-	m_pWinLabel = new Label("Wins: " + std::to_string(GameManager::Instance()->winNumber), "Anton-Regular", 20, color, glm::vec2(100, 375));
-	m_pLossesLabel = new Label("Losses: " + std::to_string(GameManager::Instance()->lossNumber), "Anton-Regular", 20, color, glm::vec2(300, 375));
-	m_pWinRatioLabel = new Label("Win ratio: 00.00%", "Anton-Regular", 20, color, glm::vec2(500, 375));
-	m_pBetLabel = new Label("Your Bet: " + std::to_string(GameManager::Instance()->playerBet), "Anton-Regular", 30, color, glm::vec2(100, 450));
+	m_pJackPotLabel = new Label("Jackpot: " + std::to_string(GameManager::Instance()->jackpot), "digital-7", 30, color, glm::vec2(150,515));
+	m_pPlayerMoneyLabel = new Label("Money: " + std::to_string(GameManager::Instance()->playerMoney), "digital-7", 30, color, glm::vec2(400, 515));
+	m_pTurnLabel = new Label("Turn: " + std::to_string(GameManager::Instance()->turn), "digital-7", 30, color, glm::vec2(600, 515));
+	m_pWinLabel = new Label("Wins: " + std::to_string(GameManager::Instance()->winNumber), "digital-7", 30, color, glm::vec2(150, 565));
+	m_pLossesLabel = new Label("Losses: " + std::to_string(GameManager::Instance()->lossNumber), "digital-7", 30, color, glm::vec2(400, 565));
+	m_pWinRatioLabel = new Label("Win ratio: 00.00%", "digital-7", 30, color, glm::vec2(600, 565));
+	m_pBetLabel = new Label("Your Bet: " + std::to_string(GameManager::Instance()->playerBet), "digital-7", 35, color, glm::vec2(150, 620));
 
 	value1Button = new BetValueButton(1);
 	value5Button = new BetValueButton(5);
@@ -192,13 +197,13 @@ void Level1Scene::start()
 	value500Button = new BetValueButton(500);
 	value1000Button = new BetValueButton(1000);
 
-	value1Button->setPosition(glm::vec2(50,500));
-	value5Button->setPosition(glm::vec2(110, 500));
-	value10Button->setPosition(glm::vec2(170, 500));
-	value50Button->setPosition(glm::vec2(230, 500));
-	value100Button->setPosition(glm::vec2(290, 500));
-	value500Button->setPosition(glm::vec2(350, 500));
-	value1000Button->setPosition(glm::vec2(410, 500));
+	value1Button->setPosition(glm::vec2(50, 700));
+	value5Button->setPosition(glm::vec2(110, 700));
+	value10Button->setPosition(glm::vec2(170, 700));
+	value50Button->setPosition(glm::vec2(230, 700));
+	value100Button->setPosition(glm::vec2(290, 700));
+	value500Button->setPosition(glm::vec2(350, 700));
+	value1000Button->setPosition(glm::vec2(410, 700));
 
 	valueMinus1Button = new BetValueButton(-1);
 	valueMinus5Button = new BetValueButton(-5);
@@ -208,27 +213,27 @@ void Level1Scene::start()
 	valueMinus500Button = new BetValueButton(-500);
 	valueMinus1000Button = new BetValueButton(-1000);
 		 
-	valueMinus1Button->setPosition(glm::vec2(50, 560));
-	valueMinus5Button->setPosition(glm::vec2(110, 560));
-	valueMinus10Button->setPosition(glm::vec2(170, 560));
-	valueMinus50Button->setPosition(glm::vec2(230, 560));
-	valueMinus100Button->setPosition(glm::vec2(290, 560));
-	valueMinus500Button->setPosition(glm::vec2(350, 560));
-	valueMinus1000Button->setPosition(glm::vec2(410, 560));
+	valueMinus1Button->setPosition(glm::vec2(50, 760));
+	valueMinus5Button->setPosition(glm::vec2(110, 760));
+	valueMinus10Button->setPosition(glm::vec2(170, 760));
+	valueMinus50Button->setPosition(glm::vec2(230, 760));
+	valueMinus100Button->setPosition(glm::vec2(290, 760));
+	valueMinus500Button->setPosition(glm::vec2(350, 760));
+	valueMinus1000Button->setPosition(glm::vec2(410, 760));
 
 	m_pFirstImage = new ResultImage();
 	m_pSecondImage = new ResultImage();
 	m_pThirdImage = new ResultImage();
 
-	m_pFirstImage->setPosition(glm::vec2(200, 150));
-	m_pSecondImage->setPosition(glm::vec2(400, 150));
-	m_pThirdImage->setPosition(glm::vec2(600, 150));
+	m_pFirstImage->setPosition(glm::vec2(280, 270));
+	m_pSecondImage->setPosition(glm::vec2(393, 270));
+	m_pThirdImage->setPosition(glm::vec2(507, 270));
 
 	resetButton = new ResetButton();
 	quitButton = new QuitButton();
 
-	resetButton->setPosition(glm::vec2(600, 550));
-	quitButton->setPosition(glm::vec2(700, 550));
+	resetButton->setPosition(glm::vec2(275, 450));
+	quitButton->setPosition(glm::vec2(750, 760));
 }
 
 void Level1Scene::updateLabels() const
@@ -255,6 +260,13 @@ Level1Scene::~Level1Scene()
 
 void Level1Scene::draw()
 {
+	m_pBackground->draw();
+	m_pInfoLabel->draw();
+
+	m_pFirstImage->draw();
+	m_pSecondImage->draw();
+	m_pThirdImage->draw();
+	
 	m_pSlotMachine->draw();
 	m_pPlayButton->draw();
 	m_pJackPotLabel->draw();
@@ -282,9 +294,7 @@ void Level1Scene::draw()
 	valueMinus500Button->draw();
 	valueMinus1000Button->draw();
 
-	m_pFirstImage->draw();
-	m_pSecondImage->draw();
-	m_pThirdImage->draw();
+
 
 	quitButton->draw();
 	resetButton->draw();
@@ -293,7 +303,7 @@ void Level1Scene::draw()
 	{
 		ImGui::Render();
 		ImGuiSDL::Render(ImGui::GetDrawData());
-		SDL_SetRenderDrawColor(TheGame::Instance()->getRenderer(), 255, 255, 255, 255);
+		SDL_SetRenderDrawColor(TheGame::Instance()->getRenderer(), 0, 0, 0, 255);
 	}
 }
 
@@ -411,6 +421,7 @@ void Level1Scene::handleEvents()
 			{
 			case SDL_BUTTON_LEFT:
 				m_pPlayButton->setMouseButtonClicked(false);
+				
 				value1Button->setMouseButtonClicked(false);
 				value5Button->setMouseButtonClicked(false);
 				value10Button->setMouseButtonClicked(false);
@@ -454,7 +465,7 @@ void Level1Scene::handleEvents()
 				TheGame::Instance()->changeSceneState(SceneState::END_SCENE);
 				break;
 			case SDLK_BACKQUOTE:
-				m_displayUI = (m_displayUI) ? false : true;
+				//m_displayUI = (m_displayUI) ? false : true;
 				break;
 			case SDLK_f:
 				//std::cout << "**** NEW PATH ****" << std::endl;

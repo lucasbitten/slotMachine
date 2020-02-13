@@ -4,7 +4,7 @@
 ResultImage::ResultImage()
 {
 
-	TheTextureManager::Instance()->load("../Assets/textures/Sonic.png",
+	TheTextureManager::Instance()->load("../Assets/textures/Spin.png",
 		"resultImage", TheGame::Instance()->getRenderer());
 
 	glm::vec2 size = TheTextureManager::Instance()->getTextureSize("resultImage");

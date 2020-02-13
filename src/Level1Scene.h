@@ -11,6 +11,8 @@
 #include "ResultImage.h"
 #include "QuitButton.h"
 #include "ResetButton.h"
+#include "InfoLabel.h"
+#include "Background.h"
 
 
 class Level1Scene : public Scene
@@ -66,6 +68,9 @@ private:
 	ResultImage* m_pFirstImage;
 	ResultImage* m_pSecondImage;
 	ResultImage* m_pThirdImage;
+
+	InfoLabel* m_pInfoLabel;
+	Background* m_pBackground;
 
 	void updateLabels() const;
 

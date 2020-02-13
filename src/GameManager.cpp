@@ -49,8 +49,8 @@ void GameManager::resetGame()
 
 void GameManager::checkJackPot()
 {
-	const float jackPotTry = floor((static_cast<double>(rand()) / (RAND_MAX)) * 51 + 1);
-	const float jackPotWin = floor((static_cast<double>(rand()) / (RAND_MAX)) * 51 + 1);
+	const float jackPotTry = floor((double(rand()) / (RAND_MAX)) * 51 + 1);
+	const float jackPotWin = floor((double(rand()) / (RAND_MAX)) * 51 + 1);
     if (jackPotTry == jackPotWin) {
         std::cout << "You Won the $" << jackpot << " Jackpot!!" << std::endl;
         playerMoney += jackpot;
@@ -94,7 +94,7 @@ std::vector<std::string> GameManager:: reels()
     for (int spin = 0; spin < 3; spin++) {
         std::cout << spin << std::endl;
 
-        outCome[spin] = floor((static_cast<double>(rand()) / (RAND_MAX) * 65) + 1);
+        outCome[spin] = floor((double(rand()) / (RAND_MAX) * 65) + 1);
         std::cout << outCome[spin] << std::endl;
 
         if(outCome[spin] >= 1 && outCome[spin] <= 27)

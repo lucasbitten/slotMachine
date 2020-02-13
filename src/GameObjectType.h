@@ -10,7 +10,9 @@ enum GameObjectType {
 	QUIT_BUTTON,
 	RESTART_BUTTON,
 	RESULT_IMAGE,
-	SLOT_MACHINE
+	SLOT_MACHINE,
+	INFO_LABEL,
+	BACKGROUND
 };
 
 #endif /* defined (__GAME_OBJECT_TYPE__)*/

@@ -120,6 +120,12 @@
     <ClCompile Include="..\src\RestartButton.cpp">
       <Filter>Game Objects\Buttons</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\InfoLabel.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Background.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Game.h">
@@ -220,6 +226,12 @@
     </ClInclude>
     <ClInclude Include="..\src\RestartButton.h">
       <Filter>Game Objects\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\InfoLabel.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Background.h">
+      <Filter>Game Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

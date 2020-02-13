@@ -4,7 +4,7 @@
 SlotMachine::SlotMachine()
 {
 
-	TheTextureManager::Instance()->load("../Assets/textures/SlotMachine.png",
+	TheTextureManager::Instance()->load("../Assets/textures/Machine.png",
 		"slotMachine", TheGame::Instance()->getRenderer());
 
 	glm::vec2 size = TheTextureManager::Instance()->getTextureSize("slotMachine");
