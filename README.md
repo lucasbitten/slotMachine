@@ -1,3 +1,3 @@
-# COMP397-W2020-Lesson4A
+# COMP397-W2020 - Slot Machine Project
 
-## Demo for Web Game Programming for Game Students @ Centennial
+## Slot Machine Project for COMP397 class
