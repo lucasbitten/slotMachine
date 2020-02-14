@@ -29,6 +29,10 @@ public:
 
 	// getters
 	glm::vec2 getMousePosition();
+	
+	ResultImage* m_pFirstImage;
+	ResultImage* m_pSecondImage;
+	ResultImage* m_pThirdImage;
 
 private:
 	// game objects
@@ -65,9 +69,7 @@ private:
 	QuitButton* quitButton;
 	ResetButton* resetButton;
 
-	ResultImage* m_pFirstImage;
-	ResultImage* m_pSecondImage;
-	ResultImage* m_pThirdImage;
+
 
 	InfoLabel* m_pInfoLabel;
 	Background* m_pBackground;

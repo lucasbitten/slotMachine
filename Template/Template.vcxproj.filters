@@ -233,5 +233,8 @@
     <ClInclude Include="..\src\Background.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\ItemType.h">
+      <Filter>Enums</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

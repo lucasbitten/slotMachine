@@ -221,13 +221,10 @@ void Level1Scene::start()
 	valueMinus500Button->setPosition(glm::vec2(350, 760));
 	valueMinus1000Button->setPosition(glm::vec2(410, 760));
 
-	m_pFirstImage = new ResultImage();
-	m_pSecondImage = new ResultImage();
-	m_pThirdImage = new ResultImage();
+	m_pFirstImage = new ResultImage(glm::vec2(280, 270));
+	m_pSecondImage = new ResultImage(glm::vec2(393, 270));
+	m_pThirdImage = new ResultImage(glm::vec2(507, 270));
 
-	m_pFirstImage->setPosition(glm::vec2(280, 270));
-	m_pSecondImage->setPosition(glm::vec2(393, 270));
-	m_pThirdImage->setPosition(glm::vec2(507, 270));
 
 	resetButton = new ResetButton();
 	quitButton = new QuitButton();
@@ -309,6 +306,11 @@ void Level1Scene::draw()
 
 void Level1Scene::update()
 {
+	m_pFirstImage->setItem(GameManager::Instance()->itemsResult[0]);
+	m_pSecondImage->setItem(GameManager::Instance()->itemsResult[1]);
+	m_pThirdImage->setItem(GameManager::Instance()->itemsResult[2]);
+
+	
 	m_pPlayButton->setMousePosition(m_mousePosition);
 	m_pPlayButton->ButtonClick();
 
@@ -411,6 +413,8 @@ void Level1Scene::handleEvents()
 
 				resetButton->setMouseButtonClicked(true);
 				quitButton->setMouseButtonClicked(true);
+
+				std::cout << "Changed value" << std::endl;
 				
 				break;
 			}

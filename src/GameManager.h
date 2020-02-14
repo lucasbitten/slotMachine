@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include "ItemType.h"
 
 class GameManager
 {
@@ -44,6 +45,8 @@ public:
 	int winNumber = 0;
 	int lossNumber = 0;
 	std::vector<std::string> spinResult;
+	std::vector<ItemType> itemsResult = {SPIN,SPIN,SPIN};
+
 	std::string fruits = "";
 	float winRatio = 0;
 	std::ostringstream winRatioText;

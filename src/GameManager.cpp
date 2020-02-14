@@ -91,7 +91,10 @@ std::vector<std::string> GameManager:: reels()
 	std::vector<std::string> betLine = { " ", " ", " " };
     std::vector<int> outCome = { 0, 0, 0 };
 
+
+	
     for (int spin = 0; spin < 3; spin++) {
+
         std::cout << spin << std::endl;
 
         outCome[spin] = floor((double(rand()) / (RAND_MAX) * 65) + 1);
@@ -100,40 +103,54 @@ std::vector<std::string> GameManager:: reels()
         if(outCome[spin] >= 1 && outCome[spin] <= 27)
         {
             betLine[spin] = "blank";
+            itemsResult[spin] = ItemType::BLANK;
             blanks++;
         } else if((outCome[spin] >= 28 && outCome[spin] <= 37))
         {
             betLine[spin] = "Grapes";
+            itemsResult[spin] = ItemType::GRAPE;
+
             grapes++;
         }
         else if ((outCome[spin] >= 38 && outCome[spin] <= 46))
         {
             betLine[spin] = "Banana";
+            itemsResult[spin] = ItemType::BANANA;
+
             bananas++;
         }
         else if ((outCome[spin] >= 47 && outCome[spin] <= 54))
         {
             betLine[spin] = "Orange";
+            itemsResult[spin] = ItemType::ORANGE;
+
             oranges++;
         }
         else if ((outCome[spin] >= 55 && outCome[spin] <= 59))
         {
             betLine[spin] = "Cherry";
+            itemsResult[spin] = ItemType::CHERRY;
+
             cherries++;
         }
         else if ((outCome[spin] >= 60 && outCome[spin] <= 62))
         {
             betLine[spin] = "Bar";
+            itemsResult[spin] = ItemType::BAR;
+
             bars++;
         }
         else if ((outCome[spin] >= 63 && outCome[spin] <= 64))
         {
             betLine[spin] = "Bell";
+            itemsResult[spin] = ItemType::BELL;
+
             bells++;
         }
         else if ((outCome[spin] == 65))
         {
             betLine[spin] = "Seven";
+            itemsResult[spin] = ItemType::SEVENS;
             sevens++;
         }
     }

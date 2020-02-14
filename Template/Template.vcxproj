@@ -207,6 +207,7 @@
     <ClInclude Include="..\src\GameObject.h" />
     <ClInclude Include="..\src\GameObjectType.h" />
     <ClInclude Include="..\src\InfoLabel.h" />
+    <ClInclude Include="..\src\ItemType.h" />
     <ClInclude Include="..\src\Label.h" />
     <ClInclude Include="..\src\Level1Scene.h" />
     <ClInclude Include="..\src\PlayButton.h" />
