@@ -33,13 +33,19 @@ public:
 	void checkJackPot();
 	void showWinMessage();
 	void showLossMessage();
-	//int checkRange(int value, int lowerBounds, int upperBounds);
 	std::vector<std::string>  reels();
 	void determineWinnings();
+	void showMessageDialog(std::string line1, std::string line2);
 
+	
 	int playerMoney = 1000;
 	int winnings = 0;
 	int jackpot = 5000;
+	
+	bool showingMessage = false;
+	std::string messageContentLine1 = "";
+	std::string messageContentLine2 = "";
+
 	int turn = 0;
 	int playerBet = 0;
 	int winNumber = 0;

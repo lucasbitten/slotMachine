@@ -35,7 +35,6 @@ void GameManager::resetFruitTally()
 
 void GameManager::resetGame()
 {
-
     playerMoney = 1000;
     winnings = 0;
     jackpot = 5000;
@@ -46,28 +45,29 @@ void GameManager::resetGame()
     winRatio = 0;
     winRatioText.str("00.00%");
 }
-
+void GameManager::showMessageDialog(std::string messageLine1, std::string messageLine2)
+{
+    showingMessage = true;
+    messageContentLine1 = messageLine1;
+    messageContentLine2 = messageLine2;
+}
 void GameManager::checkJackPot()
 {
 	const float jackPotTry = floor((double(rand()) / (RAND_MAX)) * 51 + 1);
 	const float jackPotWin = floor((double(rand()) / (RAND_MAX)) * 51 + 1);
     if (jackPotTry == jackPotWin) {
-        std::cout << "You Won the $" << jackpot << " Jackpot!!" << std::endl;
+        GameManager::Instance()->showMessageDialog("Congratulations!", "You Won the " + std::to_string(jackpot) + " Jackpot!!");
         playerMoney += jackpot;
         jackpot = 1000;
-
     }
-
 }
 
 void GameManager::showWinMessage()
 {
-
     playerMoney += winnings;
     std::cout << "You Won " << winnings << "!" << std::endl;
     resetFruitTally();
-    checkJackPot();
-	
+    checkJackPot();	
 }
 
 void GameManager::showLossMessage()
@@ -91,8 +91,6 @@ std::vector<std::string> GameManager:: reels()
 	std::vector<std::string> betLine = { " ", " ", " " };
     std::vector<int> outCome = { 0, 0, 0 };
 
-
-	
     for (int spin = 0; spin < 3; spin++) {
 
         std::cout << spin << std::endl;
@@ -157,7 +155,6 @@ std::vector<std::string> GameManager:: reels()
     std::cout << betLine[0] << std::endl;
     return betLine;
 
-	
 }
 
 void GameManager::determineWinnings()
@@ -236,3 +233,5 @@ void GameManager::determineWinnings()
 
 	
 }
+
+

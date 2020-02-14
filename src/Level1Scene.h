@@ -13,7 +13,8 @@
 #include "ResetButton.h"
 #include "InfoLabel.h"
 #include "Background.h"
-
+#include "MessageDialog.h"
+#include "DialogButton.h"
 
 class Level1Scene : public Scene
 {
@@ -33,7 +34,7 @@ public:
 	ResultImage* m_pFirstImage;
 	ResultImage* m_pSecondImage;
 	ResultImage* m_pThirdImage;
-
+	
 private:
 	// game objects
 
@@ -69,6 +70,10 @@ private:
 	QuitButton* quitButton;
 	ResetButton* resetButton;
 
+	MessageDialog* message;
+	DialogButton* dialogButton;
+	Label* messageTextLabelLine1;
+	Label* messageTextLabelLine2;
 
 
 	InfoLabel* m_pInfoLabel;

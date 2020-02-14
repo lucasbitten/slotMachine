@@ -11,7 +11,7 @@
 class Label : public DisplayObject
 {
 public:
-	Label(std::string text = "Default Label Text", std::string fontName = "lazy", int size = 20, SDL_Color colour = {0, 0, 0, 255}, glm::vec2 position = glm::vec2(), int fontStyle = TTF_STYLE_NORMAL, bool isCentered = true);
+	Label(std::string text = "Default Label Text", std::string fontName = "Casino", int size = 20, SDL_Color colour = {0, 0, 0, 255}, glm::vec2 position = glm::vec2(), int fontStyle = TTF_STYLE_NORMAL, bool isCentered = true);
 	~Label();
 
 	// Inherited via GameObject

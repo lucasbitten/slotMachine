@@ -164,6 +164,7 @@
     <ClCompile Include="..\src\Background.cpp" />
     <ClCompile Include="..\src\BetValueButton.cpp" />
     <ClCompile Include="..\src\Button.cpp" />
+    <ClCompile Include="..\src\DialogButton.cpp" />
     <ClCompile Include="..\src\DisplayObject.cpp" />
     <ClCompile Include="..\src\EndScene.cpp" />
     <ClCompile Include="..\src\FontManager.cpp" />
@@ -174,6 +175,7 @@
     <ClCompile Include="..\src\Label.cpp" />
     <ClCompile Include="..\src\Level1Scene.cpp" />
     <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\MessageDialog.cpp" />
     <ClCompile Include="..\src\PlayButton.cpp" />
     <ClCompile Include="..\src\QuitButton.cpp" />
     <ClCompile Include="..\src\ResetButton.cpp" />
@@ -195,10 +197,12 @@
     <ClInclude Include="..\include\IMGUI\imstb_textedit.h" />
     <ClInclude Include="..\include\IMGUI\imstb_truetype.h" />
     <ClInclude Include="..\include\IMGUI_SDL\imgui_sdl.h" />
+    <ClInclude Include="..\src\AuthorInfos.h" />
     <ClInclude Include="..\src\Background.h" />
     <ClInclude Include="..\src\BetValueButton.h" />
     <ClInclude Include="..\src\Button.h" />
     <ClInclude Include="..\src\Config.h" />
+    <ClInclude Include="..\src\DialogButton.h" />
     <ClInclude Include="..\src\DisplayObject.h" />
     <ClInclude Include="..\src\EndScene.h" />
     <ClInclude Include="..\src\FontManager.h" />
@@ -210,6 +214,7 @@
     <ClInclude Include="..\src\ItemType.h" />
     <ClInclude Include="..\src\Label.h" />
     <ClInclude Include="..\src\Level1Scene.h" />
+    <ClInclude Include="..\src\MessageDialog.h" />
     <ClInclude Include="..\src\PlayButton.h" />
     <ClInclude Include="..\src\QuitButton.h" />
     <ClInclude Include="..\src\ResetButton.h" />

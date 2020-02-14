@@ -231,6 +231,15 @@ void Level1Scene::start()
 
 	resetButton->setPosition(glm::vec2(275, 450));
 	quitButton->setPosition(glm::vec2(750, 760));
+
+	
+	message = new MessageDialog();
+	message->setPosition(glm::vec2(Config::SCREEN_WIDTH*0.5f, Config::SCREEN_HEIGHT*0.5f));
+	dialogButton = new DialogButton();
+	dialogButton->setPosition(glm::vec2(560, 450));
+	messageTextLabelLine1 = new Label("","Anton-Regular",20, color,glm::vec2(400,340));
+	messageTextLabelLine2 = new Label("", "Anton-Regular", 20, color, glm::vec2(400, 380));
+
 }
 
 void Level1Scene::updateLabels() const
@@ -257,6 +266,9 @@ Level1Scene::~Level1Scene()
 
 void Level1Scene::draw()
 {
+
+
+	
 	m_pBackground->draw();
 	m_pInfoLabel->draw();
 
@@ -296,12 +308,23 @@ void Level1Scene::draw()
 	quitButton->draw();
 	resetButton->draw();
 	
-	if (m_displayUI)
+	if (GameManager::Instance()->showingMessage)
 	{
-		ImGui::Render();
-		ImGuiSDL::Render(ImGui::GetDrawData());
-		SDL_SetRenderDrawColor(TheGame::Instance()->getRenderer(), 0, 0, 0, 255);
+		messageTextLabelLine1->setText(GameManager::Instance()->messageContentLine1);
+		messageTextLabelLine2->setText(GameManager::Instance()->messageContentLine2);
+
+		message->draw();
+		messageTextLabelLine1->draw();
+		messageTextLabelLine2->draw();
+		dialogButton->draw();
 	}
+	
+	//if (m_displayUI)
+	//{
+	//	ImGui::Render();
+	//	ImGuiSDL::Render(ImGui::GetDrawData());
+	//	SDL_SetRenderDrawColor(TheGame::Instance()->getRenderer(), 0, 0, 0, 255);
+	//}
 }
 
 void Level1Scene::update()
@@ -310,48 +333,59 @@ void Level1Scene::update()
 	m_pSecondImage->setItem(GameManager::Instance()->itemsResult[1]);
 	m_pThirdImage->setItem(GameManager::Instance()->itemsResult[2]);
 
+	if (!GameManager::Instance()->showingMessage)
+	{
+		m_pPlayButton->setMousePosition(m_mousePosition);
+		m_pPlayButton->ButtonClick();
+
+		resetButton->setMousePosition(m_mousePosition);
+		resetButton->ButtonClick();
+		quitButton->setMousePosition(m_mousePosition);
+		quitButton->ButtonClick();
+		value1Button->setMousePosition(m_mousePosition);
+		value5Button->setMousePosition(m_mousePosition);
+		value10Button->setMousePosition(m_mousePosition);
+		value50Button->setMousePosition(m_mousePosition);
+		value100Button->setMousePosition(m_mousePosition);
+		value500Button->setMousePosition(m_mousePosition);
+		value1000Button->setMousePosition(m_mousePosition);
+
+		value1Button->ButtonClick();
+		value5Button->ButtonClick();
+		value10Button->ButtonClick();
+		value50Button->ButtonClick();
+		value100Button->ButtonClick();
+		value500Button->ButtonClick();
+		value1000Button->ButtonClick();
+
+		valueMinus1Button->setMousePosition(m_mousePosition);
+		valueMinus5Button->setMousePosition(m_mousePosition);
+		valueMinus10Button->setMousePosition(m_mousePosition);
+		valueMinus50Button->setMousePosition(m_mousePosition);
+		valueMinus100Button->setMousePosition(m_mousePosition);
+		valueMinus500Button->setMousePosition(m_mousePosition);
+		valueMinus1000Button->setMousePosition(m_mousePosition);
+
+		valueMinus1Button->ButtonClick();
+		valueMinus5Button->ButtonClick();
+		valueMinus10Button->ButtonClick();
+		valueMinus50Button->ButtonClick();
+		valueMinus100Button->ButtonClick();
+		valueMinus500Button->ButtonClick();
+		valueMinus1000Button->ButtonClick();
+
+	} else
+	{
+		dialogButton->setMousePosition(m_mousePosition);
+		dialogButton->ButtonClick();
+	}
 	
-	m_pPlayButton->setMousePosition(m_mousePosition);
-	m_pPlayButton->ButtonClick();
+	if(GameManager::Instance()->playerMoney <= 0)
+	{
+		m_pPlayButton->m_alpha = 100;
+	}
 
-	resetButton->setMousePosition(m_mousePosition);
-	resetButton->ButtonClick();
-	quitButton->setMousePosition(m_mousePosition);
-	quitButton->ButtonClick();
 	
-
-	value1Button->setMousePosition(m_mousePosition);
-	value5Button->setMousePosition(m_mousePosition);
-	value10Button->setMousePosition(m_mousePosition);
-	value50Button->setMousePosition(m_mousePosition);
-	value100Button->setMousePosition(m_mousePosition);
-	value500Button->setMousePosition(m_mousePosition);
-	value1000Button->setMousePosition(m_mousePosition);
-	
-	value1Button->ButtonClick();
-	value5Button->ButtonClick();
-	value10Button->ButtonClick();
-	value50Button->ButtonClick();
-	value100Button->ButtonClick();
-	value500Button->ButtonClick();
-	value1000Button->ButtonClick();
-
-	valueMinus1Button->setMousePosition(m_mousePosition);
-	valueMinus5Button->setMousePosition(m_mousePosition);
-	valueMinus10Button->setMousePosition(m_mousePosition);
-	valueMinus50Button->setMousePosition(m_mousePosition);
-	valueMinus100Button->setMousePosition(m_mousePosition);
-	valueMinus500Button->setMousePosition(m_mousePosition);
-	valueMinus1000Button->setMousePosition(m_mousePosition);
-
-	valueMinus1Button->ButtonClick();
-	valueMinus5Button->ButtonClick();
-	valueMinus10Button->ButtonClick();
-	valueMinus50Button->ButtonClick();
-	valueMinus100Button->ButtonClick();
-	valueMinus500Button->ButtonClick();
-	valueMinus1000Button->ButtonClick();
-
 	if (m_displayUI)
 	{
 		m_updateUI();
@@ -394,27 +428,35 @@ void Level1Scene::handleEvents()
 			{
 			case SDL_BUTTON_LEFT:
 
-				m_pPlayButton->setMouseButtonClicked(true);
-				value1Button->setMouseButtonClicked(true);
-				value5Button->setMouseButtonClicked(true);
-				value10Button->setMouseButtonClicked(true);
-				value50Button->setMouseButtonClicked(true);
-				value100Button->setMouseButtonClicked(true);
-				value500Button->setMouseButtonClicked(true);
-				value1000Button->setMouseButtonClicked(true);
+				if(!GameManager::Instance()->showingMessage)
+				{
+					m_pPlayButton->setMouseButtonClicked(true);
+					value1Button->setMouseButtonClicked(true);
+					value5Button->setMouseButtonClicked(true);
+					value10Button->setMouseButtonClicked(true);
+					value50Button->setMouseButtonClicked(true);
+					value100Button->setMouseButtonClicked(true);
+					value500Button->setMouseButtonClicked(true);
+					value1000Button->setMouseButtonClicked(true);
 
-				valueMinus1Button->setMouseButtonClicked(true);
-				valueMinus5Button->setMouseButtonClicked(true);
-				valueMinus10Button->setMouseButtonClicked(true);
-				valueMinus50Button->setMouseButtonClicked(true);
-				valueMinus100Button->setMouseButtonClicked(true);
-				valueMinus500Button->setMouseButtonClicked(true);
-				valueMinus1000Button->setMouseButtonClicked(true);
+					valueMinus1Button->setMouseButtonClicked(true);
+					valueMinus5Button->setMouseButtonClicked(true);
+					valueMinus10Button->setMouseButtonClicked(true);
+					valueMinus50Button->setMouseButtonClicked(true);
+					valueMinus100Button->setMouseButtonClicked(true);
+					valueMinus500Button->setMouseButtonClicked(true);
+					valueMinus1000Button->setMouseButtonClicked(true);
 
-				resetButton->setMouseButtonClicked(true);
-				quitButton->setMouseButtonClicked(true);
+					resetButton->setMouseButtonClicked(true);
+					quitButton->setMouseButtonClicked(true);
+				} else
+				{
+					dialogButton->setMouseButtonClicked(true);
+					
+				}
 
-				std::cout << "Changed value" << std::endl;
+
+
 				
 				break;
 			}
@@ -445,6 +487,8 @@ void Level1Scene::handleEvents()
 				resetButton->setMouseButtonClicked(false);
 				quitButton->setMouseButtonClicked(false);
 				
+				dialogButton->setMouseButtonClicked(false);
+
 				updateLabels();
 
 				break;

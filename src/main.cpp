@@ -27,11 +27,9 @@
 const int FPS = 60;
 const int DELAY_TIME = 1000.0f / FPS;
 
-//TODO: mudar as imagens sorteadas
+
 //TODO: mensagem de erro se nao tiver dinheiro pra aposta
-//TODO:(?) botao pra zerar valor
 //TODO: mostrar mensagem de jackpot
-//TODO: 
 
 int main(int argc, char * args[])
 {

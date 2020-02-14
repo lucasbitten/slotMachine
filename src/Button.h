@@ -25,8 +25,8 @@ public:
 
 	virtual bool ButtonClick() = 0;
 	
-private:
 	Uint8 m_alpha;
+private:
 	std::string m_name;
 	bool m_isCentered;
 	glm::vec2 m_mousePosition;

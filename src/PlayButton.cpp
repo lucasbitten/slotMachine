@@ -27,7 +27,8 @@ bool PlayButton::ButtonClick()
             if (GameManager::Instance()->playerMoney == 0)
             {
                 std::cout << "You ran out of Money! \nDo you want to play again?" << std::endl;
-            	
+                //GameManager::Instance()->showMessageDialog("You ran out of Money!", "Do you want to play again?");
+
                /* if (confirm("You ran out of Money! \nDo you want to play again?")) {
                     resetAll();
                     showPlayerStats();
@@ -35,9 +36,13 @@ bool PlayButton::ButtonClick()
             }
             else if (GameManager::Instance()->playerBet > GameManager::Instance()->playerMoney) {
                 std::cout << "You don't have enough Money to place that bet." << std::endl;
+                GameManager::Instance()->showMessageDialog("You don't have enough Money to place that bet.", "");
+
+
             }
             else if (GameManager::Instance()->playerBet <= 0) {
                 std::cout << "All bets must be a positive $ amount." << std::endl;
+                GameManager::Instance()->showMessageDialog("All bets must be a positive $ amount.", "");
             }
             else if (GameManager::Instance()->playerBet <= GameManager::Instance()->playerMoney) {
                 GameManager::Instance()->spinResult = GameManager::Instance()-> reels();
@@ -50,9 +55,10 @@ bool PlayButton::ButtonClick()
             }
             else {
                 std::cout << "Please enter a valid bet amount" << std::endl;
+                GameManager::Instance()->showMessageDialog("Please enter a valid bet amount", "");
+
             }
 
-			std::cout << "Play Button Clicked!" << std::endl;
 			m_isClicked = true;
 		}
 		return true;
