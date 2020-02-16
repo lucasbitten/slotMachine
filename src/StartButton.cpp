@@ -1,5 +1,6 @@
 #include "StartButton.h"
 #include "Game.h"
+#include "SoundManager.h"
 
 StartButton::StartButton()
 	// call super constructor
@@ -21,6 +22,7 @@ bool StartButton::ButtonClick()
 	{
 		if(!m_isClicked)
 		{
+			TheSoundManager::Instance()->playSound("button", 0);
 			TheGame::Instance()->changeSceneState(SceneState::LEVEL1_SCENE);
 			m_isClicked = true;
 		}

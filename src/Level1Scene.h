@@ -4,14 +4,14 @@
 
 #include "Scene.h"
 #include "SlotMachine.h"
-#include "PlayButton.h"
+#include "SpinButton.h"
 #include "GLM/gtx/string_cast.hpp"
 #include "Label.h"
 #include "BetValueButton.h"
 #include "ResultImage.h"
 #include "QuitButton.h"
 #include "ResetButton.h"
-#include "InfoLabel.h"
+#include "InfoBackground.h"
 #include "Background.h"
 #include "MessageDialog.h"
 #include "DialogButton.h"
@@ -30,19 +30,23 @@ public:
 
 	// getters
 	glm::vec2 getMousePosition();
-	
+
+
 	ResultImage* m_pFirstImage;
 	ResultImage* m_pSecondImage;
 	ResultImage* m_pThirdImage;
 	
 private:
 	// game objects
-
 	glm::vec2 m_mousePosition;
 
 	SlotMachine* m_pSlotMachine;
-	PlayButton* m_pPlayButton;
 
+	SpinButton* m_pSpinButton;
+
+	
+	InfoBackground* m_pInfoBackground;
+	//Player information labels
 	Label* m_pJackPotLabel;
 	Label* m_pPlayerMoneyLabel;
 	Label* m_pTurnLabel;
@@ -50,7 +54,10 @@ private:
 	Label* m_pLossesLabel;
 	Label* m_pWinRatioLabel;
 	Label* m_pBetLabel;
+	void updateInfoLabels() const;
 
+
+	//Positive Bet Buttons
 	BetValueButton* value1Button;
 	BetValueButton* value5Button;
 	BetValueButton* value10Button;
@@ -59,6 +66,7 @@ private:
 	BetValueButton* value500Button;
 	BetValueButton* value1000Button;
 
+	//Negative Bet Buttons
 	BetValueButton* valueMinus1Button;
 	BetValueButton* valueMinus5Button;
 	BetValueButton* valueMinus10Button;
@@ -66,32 +74,21 @@ private:
 	BetValueButton* valueMinus100Button;
 	BetValueButton* valueMinus500Button;
 	BetValueButton* valueMinus1000Button;
-
+	
+	//Options Buttons
 	QuitButton* quitButton;
 	ResetButton* resetButton;
 
+	//MessageDialog objects
 	MessageDialog* message;
 	DialogButton* dialogButton;
 	Label* messageTextLabelLine1;
 	Label* messageTextLabelLine2;
 
 
-	InfoLabel* m_pInfoLabel;
 	Background* m_pBackground;
 
-	void updateLabels() const;
 
-
-	
-	// ImGui utility functions
-	void m_ImGuiKeyMap();
-	void m_ImGuiSetStyle();
-	void m_updateUI();
-
-	// ImGui menu variables
-	bool m_exitApp = false;
-	bool m_displayAbout = false;
-	bool m_displayUI = false;
 
 };
 

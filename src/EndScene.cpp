@@ -4,9 +4,13 @@
 #include "GLM/gtx/string_cast.hpp"
 #include <algorithm>
 #include <iomanip>
+#include "SoundManager.h"
 
 EndScene::EndScene()
 {
+	TheSoundManager::Instance()->load("../Assets/audio/GameOver.wav",
+		"gameOver", sound_type::SOUND_SFX);
+	
 	EndScene::start();
 }
 
@@ -93,6 +97,11 @@ void EndScene::handleEvents()
 
 void EndScene::start()
 {
+
+	TheSoundManager::Instance()->playSound("gameOver", 0);
+
+
+	
 	SDL_Color color = { 230, 200, 0, 255 };
 	m_pGameOverLabel = new Label("Game Over!", "Anton-Regular", 80, color, glm::vec2(Config::SCREEN_WIDTH/2, 100));
 	m_pGameOverLabel->setParent(this);

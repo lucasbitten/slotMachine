@@ -3,11 +3,21 @@
 #include <iomanip>
 #include <sstream>
 #include "Game.h"
+#include "SoundManager.h"
 
 GameManager* GameManager::s_pInstance;
 
 GameManager::GameManager()
 {
+    TheSoundManager::Instance()->load("../Assets/audio/win.wav",
+        "win", sound_type::SOUND_SFX);
+
+    TheSoundManager::Instance()->load("../Assets/audio/Jackpot.wav",
+        "jackpot", sound_type::SOUND_SFX);
+
+    TheSoundManager::Instance()->load("../Assets/audio/lost.wav",
+        "lost", sound_type::SOUND_SFX);
+	
     winRatioText << std::setprecision(4) << "00.00%";
 }
 
@@ -20,6 +30,7 @@ void GameManager::showPlayerStats()
     std::cout << "*---- Player stats ----*" << std::endl;
     std::cout << "Win Ratio: " << std::setprecision(4)  << winRatio << "%" << std::endl;
 }
+
 
 void GameManager::resetFruitTally()
 {
@@ -56,9 +67,16 @@ void GameManager::checkJackPot()
 	const float jackPotTry = floor((double(rand()) / (RAND_MAX)) * 51 + 1);
 	const float jackPotWin = floor((double(rand()) / (RAND_MAX)) * 51 + 1);
     if (jackPotTry == jackPotWin) {
+
+        TheSoundManager::Instance()->playSound("jackpot", 0);
+
         GameManager::Instance()->showMessageDialog("Congratulations!", "You Won the " + std::to_string(jackpot) + " Jackpot!!");
         playerMoney += jackpot;
         jackpot = 1000;
+    } else
+    {
+        TheSoundManager::Instance()->playSound("win", 0);
+
     }
 }
 
@@ -72,7 +90,7 @@ void GameManager::showWinMessage()
 
 void GameManager::showLossMessage()
 {
-
+    TheSoundManager::Instance()->playSound("lost", 0);
     playerMoney -= playerBet;
     std::cout << "You Lost! " << std::endl;
     resetFruitTally();

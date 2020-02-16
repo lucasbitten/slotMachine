@@ -6,179 +6,43 @@
 #include <algorithm>
 #include <iomanip>
 #include <sstream>
+#include "SoundManager.h"
+#include <chrono>
+#include <thread>
 
-
-
-// ImGui functions ***********************************************
-
-
-void Level1Scene::m_ImGuiKeyMap()
-{
-	ImGuiIO& io = ImGui::GetIO();
-
-	// Keyboard mapping. ImGui will use those indices to peek into the io.KeysDown[] array.
-	io.KeyMap[ImGuiKey_Tab] = SDL_SCANCODE_TAB;
-	io.KeyMap[ImGuiKey_LeftArrow] = SDL_SCANCODE_LEFT;
-	io.KeyMap[ImGuiKey_RightArrow] = SDL_SCANCODE_RIGHT;
-	io.KeyMap[ImGuiKey_UpArrow] = SDL_SCANCODE_UP;
-	io.KeyMap[ImGuiKey_DownArrow] = SDL_SCANCODE_DOWN;
-	io.KeyMap[ImGuiKey_PageUp] = SDL_SCANCODE_PAGEUP;
-	io.KeyMap[ImGuiKey_PageDown] = SDL_SCANCODE_PAGEDOWN;
-	io.KeyMap[ImGuiKey_Home] = SDL_SCANCODE_HOME;
-	io.KeyMap[ImGuiKey_End] = SDL_SCANCODE_END;
-	io.KeyMap[ImGuiKey_Insert] = SDL_SCANCODE_INSERT;
-	io.KeyMap[ImGuiKey_Delete] = SDL_SCANCODE_DELETE;
-	io.KeyMap[ImGuiKey_Backspace] = SDL_SCANCODE_BACKSPACE;
-	io.KeyMap[ImGuiKey_Space] = SDL_SCANCODE_SPACE;
-	io.KeyMap[ImGuiKey_Enter] = SDL_SCANCODE_RETURN;
-	io.KeyMap[ImGuiKey_Escape] = SDL_SCANCODE_ESCAPE;
-
-	io.KeyMap[ImGuiKey_A] = SDL_SCANCODE_A;
-	io.KeyMap[ImGuiKey_C] = SDL_SCANCODE_C;
-	io.KeyMap[ImGuiKey_V] = SDL_SCANCODE_V;
-	io.KeyMap[ImGuiKey_X] = SDL_SCANCODE_X;
-	io.KeyMap[ImGuiKey_Y] = SDL_SCANCODE_Y;
-	io.KeyMap[ImGuiKey_Z] = SDL_SCANCODE_Z;
-}
-
-void Level1Scene::m_ImGuiSetStyle()
-{
-	ImGuiStyle& style = ImGui::GetStyle();
-
-	style.Alpha = 0.8f;
-	style.FrameRounding = 3.0f;
-	style.Colors[ImGuiCol_Text] = ImVec4(0.00f, 0.00f, 0.00f, 1.00f);
-	style.Colors[ImGuiCol_WindowBg] = ImVec4(0.94f, 0.94f, 0.94f, 0.94f);
-	style.Colors[ImGuiCol_ChildWindowBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
-	style.Colors[ImGuiCol_PopupBg] = ImVec4(1.00f, 1.00f, 1.00f, 0.94f);
-	style.Colors[ImGuiCol_Border] = ImVec4(0.00f, 0.00f, 0.00f, 0.39f);
-	style.Colors[ImGuiCol_BorderShadow] = ImVec4(1.00f, 1.00f, 1.00f, 0.10f);
-	style.Colors[ImGuiCol_FrameBg] = ImVec4(1.00f, 1.00f, 1.00f, 0.94f);
-	style.Colors[ImGuiCol_FrameBgHovered] = ImVec4(0.26f, 0.59f, 0.98f, 0.40f);
-	style.Colors[ImGuiCol_FrameBgActive] = ImVec4(0.26f, 0.59f, 0.98f, 0.67f);
-	style.Colors[ImGuiCol_TitleBg] = ImVec4(0.96f, 0.96f, 0.96f, 1.00f);
-	style.Colors[ImGuiCol_TitleBgCollapsed] = ImVec4(1.00f, 1.00f, 1.00f, 0.51f);
-	style.Colors[ImGuiCol_TitleBgActive] = ImVec4(0.82f, 0.82f, 0.82f, 1.00f);
-	style.Colors[ImGuiCol_MenuBarBg] = ImVec4(0.86f, 0.86f, 0.86f, 1.00f);
-	style.Colors[ImGuiCol_ScrollbarBg] = ImVec4(0.98f, 0.98f, 0.98f, 0.53f);
-	style.Colors[ImGuiCol_ScrollbarGrab] = ImVec4(0.69f, 0.69f, 0.69f, 1.00f);
-	style.Colors[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.59f, 0.59f, 0.59f, 1.00f);
-	style.Colors[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.49f, 0.49f, 0.49f, 1.00f);
-	style.Colors[ImGuiCol_CheckMark] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
-	style.Colors[ImGuiCol_SliderGrab] = ImVec4(0.24f, 0.52f, 0.88f, 1.00f);
-	style.Colors[ImGuiCol_SliderGrabActive] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
-	style.Colors[ImGuiCol_Button] = ImVec4(0.26f, 0.59f, 0.98f, 0.40f);
-	style.Colors[ImGuiCol_ButtonHovered] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
-	style.Colors[ImGuiCol_ButtonActive] = ImVec4(0.06f, 0.53f, 0.98f, 1.00f);
-	style.Colors[ImGuiCol_Header] = ImVec4(0.26f, 0.59f, 0.98f, 0.31f);
-	style.Colors[ImGuiCol_HeaderHovered] = ImVec4(0.26f, 0.59f, 0.98f, 0.80f);
-	style.Colors[ImGuiCol_HeaderActive] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
-	style.Colors[ImGuiCol_Column] = ImVec4(0.39f, 0.39f, 0.39f, 1.00f);
-	style.Colors[ImGuiCol_ColumnHovered] = ImVec4(0.26f, 0.59f, 0.98f, 0.78f);
-	style.Colors[ImGuiCol_ColumnActive] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
-	style.Colors[ImGuiCol_ResizeGrip] = ImVec4(1.00f, 1.00f, 1.00f, 0.50f);
-	style.Colors[ImGuiCol_ResizeGripHovered] = ImVec4(0.26f, 0.59f, 0.98f, 0.67f);
-	style.Colors[ImGuiCol_ResizeGripActive] = ImVec4(0.26f, 0.59f, 0.98f, 0.95f);
-	style.Colors[ImGuiCol_PlotLinesHovered] = ImVec4(1.00f, 0.43f, 0.35f, 1.00f);
-	style.Colors[ImGuiCol_PlotHistogram] = ImVec4(0.90f, 0.70f, 0.00f, 1.00f);
-	style.Colors[ImGuiCol_PlotHistogramHovered] = ImVec4(1.00f, 0.60f, 0.00f, 1.00f);
-	style.Colors[ImGuiCol_TextSelectedBg] = ImVec4(0.26f, 0.59f, 0.98f, 0.35f);
-	style.Colors[ImGuiCol_ModalWindowDarkening] = ImVec4(0.20f, 0.20f, 0.20f, 0.35f);
-}
-
-void Level1Scene::m_updateUI()
-{
-	// Prepare Window Frame
-	ImGui::NewFrame();
-	//ImGui::ShowDemoWindow(); // use for debug purposes
-
-	std::string windowString = "Settings ";
-
-	ImGui::Begin(&windowString[0], NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_MenuBar);
-
-	// set window to top left corner
-	ImGui::SetWindowPos(ImVec2(300, 200), true);
-
-	/*************************************************************************************************/
-	/* MENU                                                                                          */
-	/*************************************************************************************************/
-
-	static int i0 = 123;
-	ImGui::InputInt("Player bet: ", &i0);
-
-	if (ImGui::BeginMenuBar())
-	{
-		if (ImGui::BeginMenu("File"))
-		{
-			ImGui::Separator();
-			ImGui::MenuItem("Exit", NULL, &m_exitApp);
-			ImGui::EndMenu();
-		}
-
-		if (ImGui::BeginMenu("Help"))
-		{
-			ImGui::Separator();
-			ImGui::MenuItem("About", NULL, &m_displayAbout);
-			ImGui::EndMenu();
-		}
-		ImGui::EndMenuBar();
-	}
-
-	if (m_exitApp)
-	{
-		TheGame::Instance()->quit();
-	}
-
-	if (m_displayAbout)
-	{
-		ImGui::Begin("About Slot Machine Game", &m_displayAbout, ImGuiWindowFlags_AlwaysAutoResize);
-		ImGui::Separator();
-		ImGui::Text("Authors:");
-		ImGui::Text("Lucas Bittencourt ");
-		ImGui::End();
-	}
-
-	/*************************************************************************************************/
-
-	
-	//if (ImGui::Button("Restart Game"))
-	//{
-	//	GameManager::Instance()->resetGame();
-	//}
-
-	//ImGui::SameLine();
-	//ImGui::PushItemWidth(80);
-
-
-
-
-
-	// Main Window End
-	ImGui::End();
-}
 
 /*** SCENE FUNCTIONS ***/
 
 void Level1Scene::start()
 {
 
+	TheSoundManager::Instance()->playSound("ambience", 1);
+
+	
 	GameManager::Instance()->resetGame();
 	
-	if (m_displayUI)
-	{
-		ImGui::NewFrame();
-	}
-	m_pBackground = new Background();
-
-	m_pInfoLabel = new InfoLabel();
-	m_pInfoLabel->setPosition(glm::vec2(Config::SCREEN_WIDTH * 0.5f, 560));
-	
 	// allocates memory on the heap for this game object
+
+	m_pBackground = new Background();
+	m_pInfoBackground = new InfoBackground();
+	m_pInfoBackground->setPosition(glm::vec2(Config::SCREEN_WIDTH * 0.5f, 560));
+	
 	m_pSlotMachine = new SlotMachine();
 	m_pSlotMachine->setPosition(glm::vec2(400, 250));
-	m_pPlayButton = new PlayButton();
-	m_pPlayButton->setPosition(glm::vec2(520, 450));
 
+	m_pFirstImage = new ResultImage(glm::vec2(280, 270));
+	m_pSecondImage = new ResultImage(glm::vec2(393, 270));
+	m_pThirdImage = new ResultImage(glm::vec2(507, 270));
+	
+	m_pSpinButton = new SpinButton();
+	m_pSpinButton->setPosition(glm::vec2(520, 450));
+	
+	resetButton = new ResetButton();
+	resetButton->setPosition(glm::vec2(275, 450));
+	
+	quitButton = new QuitButton();
+	quitButton->setPosition(glm::vec2(750, 760));
+	
 	SDL_Color color = { 255, 0, 0, 255 };
 	
 	m_pJackPotLabel = new Label("Jackpot: " + std::to_string(GameManager::Instance()->jackpot), "digital-7", 30, color, glm::vec2(150,515));
@@ -221,29 +85,19 @@ void Level1Scene::start()
 	valueMinus500Button->setPosition(glm::vec2(350, 760));
 	valueMinus1000Button->setPosition(glm::vec2(410, 760));
 
-	m_pFirstImage = new ResultImage(glm::vec2(280, 270));
-	m_pSecondImage = new ResultImage(glm::vec2(393, 270));
-	m_pThirdImage = new ResultImage(glm::vec2(507, 270));
-
-
-	resetButton = new ResetButton();
-	quitButton = new QuitButton();
-
-	resetButton->setPosition(glm::vec2(275, 450));
-	quitButton->setPosition(glm::vec2(750, 760));
-
 	
 	message = new MessageDialog();
 	message->setPosition(glm::vec2(Config::SCREEN_WIDTH*0.5f, Config::SCREEN_HEIGHT*0.5f));
 	dialogButton = new DialogButton();
-	dialogButton->setPosition(glm::vec2(560, 450));
-	messageTextLabelLine1 = new Label("","Anton-Regular",20, color,glm::vec2(400,340));
-	messageTextLabelLine2 = new Label("", "Anton-Regular", 20, color, glm::vec2(400, 380));
+	dialogButton->setPosition(glm::vec2(560, 500));
+	messageTextLabelLine1 = new Label(" ","Anton-Regular",20, color,glm::vec2(400,280));
+	messageTextLabelLine2 = new Label(" ", "Anton-Regular", 20, color, glm::vec2(400, 320));
 
 }
 
-void Level1Scene::updateLabels() const
+void Level1Scene::updateInfoLabels() const //Method to update all the players information during play
 {
+
 	m_pJackPotLabel->setText(("Jackpot: " + std::to_string(GameManager::Instance()->jackpot)));
 	m_pPlayerMoneyLabel->setText(("Money: " + std::to_string(GameManager::Instance()->playerMoney)));
 	m_pTurnLabel->setText(("Turn: " + std::to_string(GameManager::Instance()->turn))); 
@@ -257,6 +111,8 @@ void Level1Scene::updateLabels() const
 
 Level1Scene::Level1Scene()
 {
+	TheSoundManager::Instance()->load("../Assets/audio/Ambience.ogg",
+		"ambience", sound_type::SOUND_SFX);
 	Level1Scene::start();
 }
 
@@ -267,17 +123,18 @@ Level1Scene::~Level1Scene()
 void Level1Scene::draw()
 {
 
-
-	
 	m_pBackground->draw();
-	m_pInfoLabel->draw();
+	m_pInfoBackground->draw();
 
 	m_pFirstImage->draw();
 	m_pSecondImage->draw();
 	m_pThirdImage->draw();
-	
 	m_pSlotMachine->draw();
-	m_pPlayButton->draw();
+	
+	m_pSpinButton->draw();
+	quitButton->draw();
+	resetButton->draw();
+	
 	m_pJackPotLabel->draw();
 	m_pPlayerMoneyLabel->draw();
 	m_pTurnLabel->draw();
@@ -303,12 +160,8 @@ void Level1Scene::draw()
 	valueMinus500Button->draw();
 	valueMinus1000Button->draw();
 
-
-
-	quitButton->draw();
-	resetButton->draw();
 	
-	if (GameManager::Instance()->showingMessage)
+	if (GameManager::Instance()->showingMessage) //Draw the message dialog box only when needed
 	{
 		messageTextLabelLine1->setText(GameManager::Instance()->messageContentLine1);
 		messageTextLabelLine2->setText(GameManager::Instance()->messageContentLine2);
@@ -318,30 +171,27 @@ void Level1Scene::draw()
 		messageTextLabelLine2->draw();
 		dialogButton->draw();
 	}
-	
-	//if (m_displayUI)
-	//{
-	//	ImGui::Render();
-	//	ImGuiSDL::Render(ImGui::GetDrawData());
-	//	SDL_SetRenderDrawColor(TheGame::Instance()->getRenderer(), 0, 0, 0, 255);
-	//}
 }
 
 void Level1Scene::update()
 {
+	//Seting the images result of each draw
 	m_pFirstImage->setItem(GameManager::Instance()->itemsResult[0]);
 	m_pSecondImage->setItem(GameManager::Instance()->itemsResult[1]);
 	m_pThirdImage->setItem(GameManager::Instance()->itemsResult[2]);
 
-	if (!GameManager::Instance()->showingMessage)
+	
+	if (!GameManager::Instance()->showingMessage && !GameManager::Instance()->waitingAnimation) // Disabling other buttons if the message dialog is on screen
 	{
-		m_pPlayButton->setMousePosition(m_mousePosition);
-		m_pPlayButton->ButtonClick();
+		m_pSpinButton->setMousePosition(m_mousePosition);
+		m_pSpinButton->ButtonClick();
 
 		resetButton->setMousePosition(m_mousePosition);
 		resetButton->ButtonClick();
+		
 		quitButton->setMousePosition(m_mousePosition);
 		quitButton->ButtonClick();
+		
 		value1Button->setMousePosition(m_mousePosition);
 		value5Button->setMousePosition(m_mousePosition);
 		value10Button->setMousePosition(m_mousePosition);
@@ -379,22 +229,18 @@ void Level1Scene::update()
 		dialogButton->setMousePosition(m_mousePosition);
 		dialogButton->ButtonClick();
 	}
+
 	
 	if(GameManager::Instance()->playerMoney <= 0)
 	{
-		m_pPlayButton->m_alpha = 100;
+		m_pSpinButton->m_alpha = 100;
 	}
 
-	
-	if (m_displayUI)
-	{
-		m_updateUI();
-	}
+
 }
 
 void Level1Scene::clean()
 {
-
 	removeAllChildren();
 
 
@@ -428,36 +274,31 @@ void Level1Scene::handleEvents()
 			{
 			case SDL_BUTTON_LEFT:
 
-				if(!GameManager::Instance()->showingMessage)
-				{
-					m_pPlayButton->setMouseButtonClicked(true);
-					value1Button->setMouseButtonClicked(true);
-					value5Button->setMouseButtonClicked(true);
-					value10Button->setMouseButtonClicked(true);
-					value50Button->setMouseButtonClicked(true);
-					value100Button->setMouseButtonClicked(true);
-					value500Button->setMouseButtonClicked(true);
-					value1000Button->setMouseButtonClicked(true);
-
-					valueMinus1Button->setMouseButtonClicked(true);
-					valueMinus5Button->setMouseButtonClicked(true);
-					valueMinus10Button->setMouseButtonClicked(true);
-					valueMinus50Button->setMouseButtonClicked(true);
-					valueMinus100Button->setMouseButtonClicked(true);
-					valueMinus500Button->setMouseButtonClicked(true);
-					valueMinus1000Button->setMouseButtonClicked(true);
-
-					resetButton->setMouseButtonClicked(true);
-					quitButton->setMouseButtonClicked(true);
-				} else
-				{
-					dialogButton->setMouseButtonClicked(true);
-					
-				}
-
-
-
+				//Event handler for all buttons
+				m_pSpinButton->setMouseButtonClicked(true);
+				resetButton->setMouseButtonClicked(true);
+				quitButton->setMouseButtonClicked(true);
 				
+				value1Button->setMouseButtonClicked(true);
+				value5Button->setMouseButtonClicked(true);
+				value10Button->setMouseButtonClicked(true);
+				value50Button->setMouseButtonClicked(true);
+				value100Button->setMouseButtonClicked(true);
+				value500Button->setMouseButtonClicked(true);
+				value1000Button->setMouseButtonClicked(true);
+
+				valueMinus1Button->setMouseButtonClicked(true);
+				valueMinus5Button->setMouseButtonClicked(true);
+				valueMinus10Button->setMouseButtonClicked(true);
+				valueMinus50Button->setMouseButtonClicked(true);
+				valueMinus100Button->setMouseButtonClicked(true);
+				valueMinus500Button->setMouseButtonClicked(true);
+				valueMinus1000Button->setMouseButtonClicked(true);
+
+
+
+				dialogButton->setMouseButtonClicked(true);
+
 				break;
 			}
 
@@ -466,7 +307,7 @@ void Level1Scene::handleEvents()
 			switch (event.button.button)
 			{
 			case SDL_BUTTON_LEFT:
-				m_pPlayButton->setMouseButtonClicked(false);
+				m_pSpinButton->setMouseButtonClicked(false);
 				
 				value1Button->setMouseButtonClicked(false);
 				value5Button->setMouseButtonClicked(false);
@@ -489,7 +330,7 @@ void Level1Scene::handleEvents()
 				
 				dialogButton->setMouseButtonClicked(false);
 
-				updateLabels();
+				updateInfoLabels();
 
 				break;
 			}
@@ -592,6 +433,5 @@ void Level1Scene::handleEvents()
 	io.DisplaySize.x = 1280;
 	io.DisplaySize.y = 720;
 
-	m_ImGuiKeyMap();
-	m_ImGuiSetStyle();
+
 }

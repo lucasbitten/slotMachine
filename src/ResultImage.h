@@ -20,7 +20,10 @@ public:
 	void setItem(ItemType item);
 
 	ItemType item = SPIN;
-	
+	int frame = 0;
+	int cyclesCount = 0;
+	int frameOffset;
+
 private:
 
 	glm::vec2 m_pPositionToDraw;

@@ -102,9 +102,6 @@
     <ClCompile Include="..\src\StartButton.cpp">
       <Filter>Game Objects\Buttons</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\PlayButton.cpp">
-      <Filter>Game Objects\Buttons</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Button.cpp">
       <Filter>Game Objects\Buttons</Filter>
     </ClCompile>
@@ -120,9 +117,6 @@
     <ClCompile Include="..\src\RestartButton.cpp">
       <Filter>Game Objects\Buttons</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\InfoLabel.cpp">
-      <Filter>Game Objects</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Background.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
@@ -130,6 +124,12 @@
       <Filter>Game Objects</Filter>
     </ClCompile>
     <ClCompile Include="..\src\DialogButton.cpp">
+      <Filter>Game Objects\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\InfoBackground.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\SpinButton.cpp">
       <Filter>Game Objects\Buttons</Filter>
     </ClCompile>
   </ItemGroup>
@@ -215,9 +215,6 @@
     <ClInclude Include="..\src\StartButton.h">
       <Filter>Game Objects\Buttons</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\PlayButton.h">
-      <Filter>Game Objects\Buttons</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\BetValueButton.h">
       <Filter>Game Objects\Buttons</Filter>
     </ClInclude>
@@ -233,9 +230,6 @@
     <ClInclude Include="..\src\RestartButton.h">
       <Filter>Game Objects\Buttons</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\InfoLabel.h">
-      <Filter>Game Objects</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\Background.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
@@ -250,6 +244,12 @@
     </ClInclude>
     <ClInclude Include="..\src\AuthorInfos.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\InfoBackground.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\SpinButton.h">
+      <Filter>Game Objects\Buttons</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

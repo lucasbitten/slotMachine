@@ -1,5 +1,7 @@
 #include "RestartButton.h"
 #include "Game.h"
+#include "SoundManager.h"
+
 
 RestartButton::RestartButton()
 // call super constructor
@@ -21,6 +23,8 @@ bool RestartButton::ButtonClick()
 	{
 		if (!m_isClicked)
 		{
+			TheSoundManager::Instance()->playSound("button", 0);
+
 			TheGame::Instance()->changeSceneState(SceneState::LEVEL1_SCENE);
 			m_isClicked = true;
 		}

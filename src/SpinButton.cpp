@@ -1,53 +1,55 @@
-#include "PlayButton.h"
+#include "SpinButton.h"
 #include "Game.h"
 #include "GameManager.h"
+#include "SoundManager.h"
 
-PlayButton::PlayButton()
+
+SpinButton::SpinButton()
 // call super constructor
 	:Button(
-		"../Assets/textures/PlayButton.png",
-		"playButton",
-		PLAY_BUTTON, glm::vec2(400.0f, 300.0f)), m_isClicked(false)
+		"../Assets/textures/SpinButton.png",
+		"spinButton",
+        SPIN_BUTTON, glm::vec2(400.0f, 300.0f)), m_isClicked(false)
 {
-
+    TheSoundManager::Instance()->load("../Assets/audio/Spin.wav",
+        "spin", sound_type::SOUND_SFX);
 }
 
-PlayButton::~PlayButton()
+SpinButton::~SpinButton()
 {
 }
 
-bool PlayButton::ButtonClick()
+bool SpinButton::ButtonClick()
 {
 	if (m_mouseOver() && m_mouseButtonClicked)
 	{
 		if (!m_isClicked)
 		{
-
+            TheSoundManager::Instance()->playSound("button", 0);
 
             if (GameManager::Instance()->playerMoney == 0)
             {
                 std::cout << "You ran out of Money! \nDo you want to play again?" << std::endl;
                 //GameManager::Instance()->showMessageDialog("You ran out of Money!", "Do you want to play again?");
 
-               /* if (confirm("You ran out of Money! \nDo you want to play again?")) {
-                    resetAll();
-                    showPlayerStats();
-                }*/
             }
             else if (GameManager::Instance()->playerBet > GameManager::Instance()->playerMoney) {
                 std::cout << "You don't have enough Money to place that bet." << std::endl;
-                GameManager::Instance()->showMessageDialog("You don't have enough Money to place that bet.", "");
+                GameManager::Instance()->showMessageDialog("You don't have enough Money to place that bet.", " ");
 
 
             }
             else if (GameManager::Instance()->playerBet <= 0) {
                 std::cout << "All bets must be a positive $ amount." << std::endl;
-                GameManager::Instance()->showMessageDialog("All bets must be a positive $ amount.", "");
+                GameManager::Instance()->showMessageDialog("All bets must be a positive $ amount.", " ");
             }
             else if (GameManager::Instance()->playerBet <= GameManager::Instance()->playerMoney) {
-                GameManager::Instance()->spinResult = GameManager::Instance()-> reels();
-                GameManager::Instance()->fruits = GameManager::Instance()->spinResult[0] + " - " + GameManager::Instance()->spinResult[1] + " - " + GameManager::Instance()->spinResult[2];
+                TheSoundManager::Instance()->playSound("spin", 0);
 
+                TheGameManager::Instance()->waitingAnimation = true;
+
+            	GameManager::Instance()->spinResult = GameManager::Instance()-> reels();
+                GameManager::Instance()->fruits = GameManager::Instance()->spinResult[0] + " - " + GameManager::Instance()->spinResult[1] + " - " + GameManager::Instance()->spinResult[2];
                 std::cout << "result: " << GameManager::Instance()->fruits << std::endl;
                 GameManager::Instance()->determineWinnings();
                 GameManager::Instance()->turn++;
@@ -55,7 +57,7 @@ bool PlayButton::ButtonClick()
             }
             else {
                 std::cout << "Please enter a valid bet amount" << std::endl;
-                GameManager::Instance()->showMessageDialog("Please enter a valid bet amount", "");
+                GameManager::Instance()->showMessageDialog("Please enter a valid bet amount", " ");
 
             }
 

@@ -1,6 +1,6 @@
 #include "Button.h"
 #include "Game.h"
-
+#include "SoundManager.h"
 
 Button::Button(std::string imagePath, std::string buttonName, GameObjectType type, glm::vec2 position, bool isCentered): m_name(buttonName), m_isCentered(isCentered), m_alpha(255)
 {
@@ -12,6 +12,10 @@ Button::Button(std::string imagePath, std::string buttonName, GameObjectType typ
 	setHeight(size.y);
 	setPosition(position);
 	setType(type);
+
+	TheSoundManager::Instance()->load("../Assets/audio/Button.mp3",
+		"button", sound_type::SOUND_SFX);
+	
 }
 
 Button::~Button()

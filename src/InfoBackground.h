@@ -1,14 +1,14 @@
 #pragma once
-#ifndef __INFO_LABEL__
-#define __INFO_LABEL__
+#ifndef __INFO_BACKGROUND__
+#define __INFO_BACKGROUND__
 #include "DisplayObject.h"
 
-class InfoLabel : public DisplayObject
+class InfoBackground : public DisplayObject
 {
 public:
 
-	InfoLabel();
-	~InfoLabel();
+	InfoBackground();
+	~InfoBackground();
 
 	// Inherited via GameObject
 	virtual void draw() override;

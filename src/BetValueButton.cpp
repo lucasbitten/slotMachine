@@ -1,5 +1,6 @@
 #include "BetValueButton.h"
 #include "GameManager.h"
+#include "SoundManager.h"
 
 BetValueButton::BetValueButton(int value)
 	:Button(
@@ -20,6 +21,8 @@ bool BetValueButton::ButtonClick()
     {
         if (!m_isClicked)
         {
+        	
+            TheSoundManager::Instance()->playSound("button", 0);
 
 
             GameManager::Instance()->playerBet += valueToChange;

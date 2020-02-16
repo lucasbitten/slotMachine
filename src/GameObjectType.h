@@ -4,7 +4,7 @@
 enum GameObjectType {
 	NONE = -1,
 	START_BUTTON,
-	PLAY_BUTTON,
+	SPIN_BUTTON,
 	BET_VALUE_BUTTON,
 	RESET_BUTTON,
 	QUIT_BUTTON,
@@ -12,7 +12,8 @@ enum GameObjectType {
 	RESULT_IMAGE,
 	SLOT_MACHINE,
 	INFO_LABEL,
-	BACKGROUND
+	BACKGROUND,
+	DIALOG_BUTTON
 };
 
 #endif /* defined (__GAME_OBJECT_TYPE__)*/

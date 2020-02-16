@@ -36,7 +36,6 @@ public:
 	std::vector<std::string>  reels();
 	void determineWinnings();
 	void showMessageDialog(std::string line1, std::string line2);
-
 	
 	int playerMoney = 1000;
 	int winnings = 0;
@@ -65,6 +64,8 @@ public:
 	int sevens = 0;
 	int blanks = 0;
 
+	bool waitingAnimation;
+	
 	static GameManager* s_pInstance;
 
 };

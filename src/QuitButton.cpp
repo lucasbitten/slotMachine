@@ -1,6 +1,7 @@
 #include "QuitButton.h"
 #include "Game.h"
 #include "GameManager.h"
+#include "SoundManager.h"
 
 QuitButton::QuitButton()
 // call super constructor
@@ -22,6 +23,8 @@ bool QuitButton::ButtonClick()
 	{
 		if (!m_isClicked)
 		{
+			TheSoundManager::Instance()->playSound("button", 0);
+
 			Game::Instance()->quit();
 			m_isClicked = true;
 		}

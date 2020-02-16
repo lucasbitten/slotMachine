@@ -4,11 +4,11 @@
 
 #include "Button.h"
 
-class PlayButton : public Button
+class SpinButton : public Button
 {
 public:
-	PlayButton();
-	~PlayButton();
+	SpinButton();
+	~SpinButton();
 
 
 	bool ButtonClick() override;

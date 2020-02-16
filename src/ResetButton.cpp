@@ -1,6 +1,7 @@
 #include "ResetButton.h"
 #include "Game.h"
 #include "GameManager.h"
+#include "SoundManager.h"
 
 ResetButton::ResetButton()
 // call super constructor
@@ -22,6 +23,8 @@ bool ResetButton::ButtonClick()
 	{
 		if (!m_isClicked)
 		{
+			TheSoundManager::Instance()->playSound("button", 0);
+
 			GameManager::Instance()->resetGame();
 			m_isClicked = true;
 		}

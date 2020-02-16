@@ -5,10 +5,18 @@
 #include <algorithm>
 #include <iomanip>
 #include "StartButton.h"
+#include "SoundManager.h"
 
 StartScene::StartScene()
 {
+
+
+	TheSoundManager::Instance()->load("../Assets/audio/Ambience.ogg",
+		"ambience", sound_type::SOUND_SFX);
+	
 	StartScene::start();
+
+
 }
 
 StartScene::~StartScene()
@@ -93,6 +101,9 @@ void StartScene::handleEvents()
 // this function is used for initialization
 void StartScene::start()
 {
+
+	TheSoundManager::Instance()->playSound("ambience", 1);
+	
 	m_pStartButton = new StartButton();
 	
 	SDL_Color color = { 230, 200, 0, 255 };

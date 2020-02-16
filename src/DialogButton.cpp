@@ -1,13 +1,14 @@
 #include "DialogButton.h"
 #include "Game.h"
 #include "GameManager.h"
+#include "SoundManager.h"
 
 DialogButton::DialogButton()
 // call super constructor
     :Button(
         "../Assets/textures/DialogButton.png",
         "dialogButton",
-        PLAY_BUTTON, glm::vec2(500, 400)), m_isClicked(false)
+        DIALOG_BUTTON, glm::vec2(500, 400)), m_isClicked(false)
 {
 
 }
@@ -22,6 +23,7 @@ bool DialogButton::ButtonClick()
     {
         if (!m_isClicked)
         {
+            TheSoundManager::Instance()->playSound("button", 0);
             GameManager::Instance()->showingMessage = false;
 
         }
