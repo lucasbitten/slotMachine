@@ -44,7 +44,6 @@ bool SpinButton::ButtonClick()
                 GameManager::Instance()->showMessageDialog("All bets must be a positive $ amount.", " ");
             }
             else if (GameManager::Instance()->playerBet <= GameManager::Instance()->playerMoney) {
-                TheSoundManager::Instance()->playSound("spin", 0);
 
                 TheGameManager::Instance()->waitingAnimation = true;
 
@@ -54,6 +53,14 @@ bool SpinButton::ButtonClick()
                 GameManager::Instance()->determineWinnings();
                 GameManager::Instance()->turn++;
                 GameManager::Instance()->showPlayerStats();
+
+            	if(GameManager::Instance()->playerMoney > 0)
+            	{
+                    TheSoundManager::Instance()->playSound("spin", 0);
+
+            	}
+
+            	
             }
             else {
                 std::cout << "Please enter a valid bet amount" << std::endl;

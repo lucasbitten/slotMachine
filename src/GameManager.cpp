@@ -90,8 +90,13 @@ void GameManager::showWinMessage()
 
 void GameManager::showLossMessage()
 {
-    TheSoundManager::Instance()->playSound("lost", 0);
+
     playerMoney -= playerBet;
+    if (playerMoney > 0)
+    {
+        TheSoundManager::Instance()->playSound("lost", 0);
+
+    }
     std::cout << "You Lost! " << std::endl;
     resetFruitTally();
 
