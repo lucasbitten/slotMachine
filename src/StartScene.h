@@ -5,6 +5,7 @@
 #include "Scene.h"
 #include "Label.h"
 #include "Button.h"
+#include "Background.h"
 
 class StartScene : public Scene
 {
@@ -29,7 +30,7 @@ private:
 
 	Button* m_pStartButton;
 	Label* m_pStartLabel;
-	
+	Background* m_pBackground;
 };
 
 #endif /* defined (__START_SCENE__) */

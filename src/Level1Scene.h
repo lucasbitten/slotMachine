@@ -58,37 +58,35 @@ private:
 
 
 	//Positive Bet Buttons
-	BetValueButton* value1Button;
-	BetValueButton* value5Button;
-	BetValueButton* value10Button;
-	BetValueButton* value50Button;
-	BetValueButton* value100Button;
-	BetValueButton* value500Button;
-	BetValueButton* value1000Button;
+	BetValueButton* m_pValue1Button;
+	BetValueButton* m_pValue5Button;
+	BetValueButton* m_pValue10Button;
+	BetValueButton* m_pValue50Button;
+	BetValueButton* m_pValue100Button;
+	BetValueButton* m_pValue500Button;
+	BetValueButton* m_pValue1000Button;
 
 	//Negative Bet Buttons
-	BetValueButton* valueMinus1Button;
-	BetValueButton* valueMinus5Button;
-	BetValueButton* valueMinus10Button;
-	BetValueButton* valueMinus50Button;
-	BetValueButton* valueMinus100Button;
-	BetValueButton* valueMinus500Button;
-	BetValueButton* valueMinus1000Button;
+	BetValueButton* m_pValueMinus1Button;
+	BetValueButton* m_pValueMinus5Button;
+	BetValueButton* m_pValueMinus10Button;
+	BetValueButton* m_pValueMinus50Button;
+	BetValueButton* m_pValueMinus100Button;
+	BetValueButton* m_pValueMinus500Button;
+	BetValueButton* m_pValueMinus1000Button;
 	
 	//Options Buttons
-	QuitButton* quitButton;
-	ResetButton* resetButton;
+	QuitButton* m_pQuitButton;
+	ResetButton* m_pResetButton;
 
 	//MessageDialog objects
-	MessageDialog* message;
-	DialogButton* dialogButton;
-	Label* messageTextLabelLine1;
-	Label* messageTextLabelLine2;
+	MessageDialog* m_pMessageDialog;
+	DialogButton* m_pDialogButton;
+	Label* m_pMessageTextLabelLine1;
+	Label* m_pMessageTextLabelLine2;
 
 
 	Background* m_pBackground;
-
-
 
 };
 

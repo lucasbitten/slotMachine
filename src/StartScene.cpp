@@ -25,6 +25,7 @@ StartScene::~StartScene()
 
 void StartScene::draw()
 {
+	m_pBackground->draw();
 	m_pStartLabel->draw();
 	m_pStartButton->draw();
 
@@ -105,6 +106,8 @@ void StartScene::start()
 	TheSoundManager::Instance()->playSound("ambience", 1);
 	
 	m_pStartButton = new StartButton();
+
+	m_pBackground = new Background();
 	
 	SDL_Color color = { 230, 200, 0, 255 };
 	m_pStartLabel = new Label("Slot Machine Game", "Casino", 80, color, glm::vec2(Config::SCREEN_WIDTH*0.5f, 150.0f));

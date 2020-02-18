@@ -33,7 +33,7 @@ public:
 	void checkJackPot();
 	void showWinMessage();
 	void showLossMessage();
-	std::vector<std::string>  reels();
+	std::vector<std::string> reels();
 	void determineWinnings();
 	void showMessageDialog(std::string line1, std::string line2);
 	
@@ -41,7 +41,7 @@ public:
 	int winnings = 0;
 	int jackpot = 5000;
 	
-	bool showingMessage = false;
+	bool isShowingMessage = false;
 	std::string messageContentLine1 = "";
 	std::string messageContentLine2 = "";
 
@@ -64,7 +64,7 @@ public:
 	int sevens = 0;
 	int blanks = 0;
 
-	bool waitingAnimation;
+	bool isWaitingAnimation;
 	
 	static GameManager* s_pInstance;
 

@@ -40,12 +40,12 @@ void ResultImage::draw()
 	{
 		cyclesCount = 0;
 		frame = 1;
-		TheGameManager::Instance()->waitingAnimation = false;
+		TheGameManager::Instance()->isWaitingAnimation = false;
 
 	}
 	
 	
-	if (GameManager::Instance()->waitingAnimation)
+	if (GameManager::Instance()->isWaitingAnimation)
 	{
 		
 		TheTextureManager::Instance()->drawFrame("animation", m_pPositionToDraw.x - 45, m_pPositionToDraw.y - 68, 100, 136, 0, (int)frame*0.35f, TheGame::Instance()->getRenderer(), 0, 255, SDL_FLIP_NONE);

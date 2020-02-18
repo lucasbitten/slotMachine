@@ -37,11 +37,11 @@ void Level1Scene::start()
 	m_pSpinButton = new SpinButton();
 	m_pSpinButton->setPosition(glm::vec2(520, 450));
 	
-	resetButton = new ResetButton();
-	resetButton->setPosition(glm::vec2(275, 450));
+	m_pResetButton = new ResetButton();
+	m_pResetButton->setPosition(glm::vec2(275, 450));
 	
-	quitButton = new QuitButton();
-	quitButton->setPosition(glm::vec2(750, 760));
+	m_pQuitButton = new QuitButton();
+	m_pQuitButton->setPosition(glm::vec2(750, 760));
 	
 	SDL_Color color = { 255, 0, 0, 255 };
 	
@@ -53,45 +53,45 @@ void Level1Scene::start()
 	m_pWinRatioLabel = new Label("Win ratio: 00.00%", "digital-7", 30, color, glm::vec2(600, 565));
 	m_pBetLabel = new Label("Your Bet: " + std::to_string(GameManager::Instance()->playerBet), "digital-7", 35, color, glm::vec2(150, 620));
 
-	value1Button = new BetValueButton(1);
-	value5Button = new BetValueButton(5);
-	value10Button = new BetValueButton(10);
-	value50Button = new BetValueButton(50);
-	value100Button = new BetValueButton(100);
-	value500Button = new BetValueButton(500);
-	value1000Button = new BetValueButton(1000);
+	m_pValue1Button = new BetValueButton(1);
+	m_pValue5Button = new BetValueButton(5);
+	m_pValue10Button = new BetValueButton(10);
+	m_pValue50Button = new BetValueButton(50);
+	m_pValue100Button = new BetValueButton(100);
+	m_pValue500Button = new BetValueButton(500);
+	m_pValue1000Button = new BetValueButton(1000);
 
-	value1Button->setPosition(glm::vec2(50, 700));
-	value5Button->setPosition(glm::vec2(110, 700));
-	value10Button->setPosition(glm::vec2(170, 700));
-	value50Button->setPosition(glm::vec2(230, 700));
-	value100Button->setPosition(glm::vec2(290, 700));
-	value500Button->setPosition(glm::vec2(350, 700));
-	value1000Button->setPosition(glm::vec2(410, 700));
+	m_pValue1Button->setPosition(glm::vec2(50, 700));
+	m_pValue5Button->setPosition(glm::vec2(110, 700));
+	m_pValue10Button->setPosition(glm::vec2(170, 700));
+	m_pValue50Button->setPosition(glm::vec2(230, 700));
+	m_pValue100Button->setPosition(glm::vec2(290, 700));
+	m_pValue500Button->setPosition(glm::vec2(350, 700));
+	m_pValue1000Button->setPosition(glm::vec2(410, 700));
 
-	valueMinus1Button = new BetValueButton(-1);
-	valueMinus5Button = new BetValueButton(-5);
-	valueMinus10Button = new BetValueButton(-10);
-	valueMinus50Button = new BetValueButton(-50);
-	valueMinus100Button = new BetValueButton(-100);
-	valueMinus500Button = new BetValueButton(-500);
-	valueMinus1000Button = new BetValueButton(-1000);
+	m_pValueMinus1Button = new BetValueButton(-1);
+	m_pValueMinus5Button = new BetValueButton(-5);
+	m_pValueMinus10Button = new BetValueButton(-10);
+	m_pValueMinus50Button = new BetValueButton(-50);
+	m_pValueMinus100Button = new BetValueButton(-100);
+	m_pValueMinus500Button = new BetValueButton(-500);
+	m_pValueMinus1000Button = new BetValueButton(-1000);
 		 
-	valueMinus1Button->setPosition(glm::vec2(50, 760));
-	valueMinus5Button->setPosition(glm::vec2(110, 760));
-	valueMinus10Button->setPosition(glm::vec2(170, 760));
-	valueMinus50Button->setPosition(glm::vec2(230, 760));
-	valueMinus100Button->setPosition(glm::vec2(290, 760));
-	valueMinus500Button->setPosition(glm::vec2(350, 760));
-	valueMinus1000Button->setPosition(glm::vec2(410, 760));
+	m_pValueMinus1Button->setPosition(glm::vec2(50, 760));
+	m_pValueMinus5Button->setPosition(glm::vec2(110, 760));
+	m_pValueMinus10Button->setPosition(glm::vec2(170, 760));
+	m_pValueMinus50Button->setPosition(glm::vec2(230, 760));
+	m_pValueMinus100Button->setPosition(glm::vec2(290, 760));
+	m_pValueMinus500Button->setPosition(glm::vec2(350, 760));
+	m_pValueMinus1000Button->setPosition(glm::vec2(410, 760));
 
 	
-	message = new MessageDialog();
-	message->setPosition(glm::vec2(Config::SCREEN_WIDTH*0.5f, Config::SCREEN_HEIGHT*0.5f));
-	dialogButton = new DialogButton();
-	dialogButton->setPosition(glm::vec2(560, 500));
-	messageTextLabelLine1 = new Label(" ","Anton-Regular",20, color,glm::vec2(400,280));
-	messageTextLabelLine2 = new Label(" ", "Anton-Regular", 20, color, glm::vec2(400, 320));
+	m_pMessageDialog = new MessageDialog();
+	m_pMessageDialog->setPosition(glm::vec2(Config::SCREEN_WIDTH*0.5f, Config::SCREEN_HEIGHT*0.5f));
+	m_pDialogButton = new DialogButton();
+	m_pDialogButton->setPosition(glm::vec2(560, 500));
+	m_pMessageTextLabelLine1 = new Label(" ","Anton-Regular",20, color,glm::vec2(400,280));
+	m_pMessageTextLabelLine2 = new Label(" ", "Anton-Regular", 20, color, glm::vec2(400, 320));
 
 }
 
@@ -132,8 +132,8 @@ void Level1Scene::draw()
 	m_pSlotMachine->draw();
 	
 	m_pSpinButton->draw();
-	quitButton->draw();
-	resetButton->draw();
+	m_pQuitButton->draw();
+	m_pResetButton->draw();
 	
 	m_pJackPotLabel->draw();
 	m_pPlayerMoneyLabel->draw();
@@ -144,32 +144,32 @@ void Level1Scene::draw()
 	m_pBetLabel->draw();
 
 
-	value1Button    ->draw();
-	value5Button	->draw();
-	value10Button	->draw();
-	value50Button	->draw();
-	value100Button	->draw();
-	value500Button	->draw();
-	value1000Button	->draw();
+	m_pValue1Button    ->draw();
+	m_pValue5Button	->draw();
+	m_pValue10Button	->draw();
+	m_pValue50Button	->draw();
+	m_pValue100Button	->draw();
+	m_pValue500Button	->draw();
+	m_pValue1000Button	->draw();
 
-	valueMinus1Button->draw();
-	valueMinus5Button->draw();
-	valueMinus10Button->draw();
-	valueMinus50Button->draw();
-	valueMinus100Button->draw();
-	valueMinus500Button->draw();
-	valueMinus1000Button->draw();
+	m_pValueMinus1Button->draw();
+	m_pValueMinus5Button->draw();
+	m_pValueMinus10Button->draw();
+	m_pValueMinus50Button->draw();
+	m_pValueMinus100Button->draw();
+	m_pValueMinus500Button->draw();
+	m_pValueMinus1000Button->draw();
 
 	
-	if (GameManager::Instance()->showingMessage) //Draw the message dialog box only when needed
+	if (GameManager::Instance()->isShowingMessage) //Draw the message dialog box only when needed
 	{
-		messageTextLabelLine1->setText(GameManager::Instance()->messageContentLine1);
-		messageTextLabelLine2->setText(GameManager::Instance()->messageContentLine2);
+		m_pMessageTextLabelLine1->setText(GameManager::Instance()->messageContentLine1);
+		m_pMessageTextLabelLine2->setText(GameManager::Instance()->messageContentLine2);
 
-		message->draw();
-		messageTextLabelLine1->draw();
-		messageTextLabelLine2->draw();
-		dialogButton->draw();
+		m_pMessageDialog->draw();
+		m_pMessageTextLabelLine1->draw();
+		m_pMessageTextLabelLine2->draw();
+		m_pDialogButton->draw();
 	}
 }
 
@@ -181,53 +181,53 @@ void Level1Scene::update()
 	m_pThirdImage->setItem(GameManager::Instance()->itemsResult[2]);
 
 	
-	if (!GameManager::Instance()->showingMessage && !GameManager::Instance()->waitingAnimation) // Disabling other buttons if the message dialog is on screen
+	if (!GameManager::Instance()->isShowingMessage && !GameManager::Instance()->isWaitingAnimation) // Disabling other buttons if the message dialog is on screen
 	{
 		m_pSpinButton->setMousePosition(m_mousePosition);
 		m_pSpinButton->ButtonClick();
 
-		resetButton->setMousePosition(m_mousePosition);
-		resetButton->ButtonClick();
+		m_pResetButton->setMousePosition(m_mousePosition);
+		m_pResetButton->ButtonClick();
 		
-		quitButton->setMousePosition(m_mousePosition);
-		quitButton->ButtonClick();
+		m_pQuitButton->setMousePosition(m_mousePosition);
+		m_pQuitButton->ButtonClick();
 		
-		value1Button->setMousePosition(m_mousePosition);
-		value5Button->setMousePosition(m_mousePosition);
-		value10Button->setMousePosition(m_mousePosition);
-		value50Button->setMousePosition(m_mousePosition);
-		value100Button->setMousePosition(m_mousePosition);
-		value500Button->setMousePosition(m_mousePosition);
-		value1000Button->setMousePosition(m_mousePosition);
+		m_pValue1Button->setMousePosition(m_mousePosition);
+		m_pValue5Button->setMousePosition(m_mousePosition);
+		m_pValue10Button->setMousePosition(m_mousePosition);
+		m_pValue50Button->setMousePosition(m_mousePosition);
+		m_pValue100Button->setMousePosition(m_mousePosition);
+		m_pValue500Button->setMousePosition(m_mousePosition);
+		m_pValue1000Button->setMousePosition(m_mousePosition);
 
-		value1Button->ButtonClick();
-		value5Button->ButtonClick();
-		value10Button->ButtonClick();
-		value50Button->ButtonClick();
-		value100Button->ButtonClick();
-		value500Button->ButtonClick();
-		value1000Button->ButtonClick();
+		m_pValue1Button->ButtonClick();
+		m_pValue5Button->ButtonClick();
+		m_pValue10Button->ButtonClick();
+		m_pValue50Button->ButtonClick();
+		m_pValue100Button->ButtonClick();
+		m_pValue500Button->ButtonClick();
+		m_pValue1000Button->ButtonClick();
 
-		valueMinus1Button->setMousePosition(m_mousePosition);
-		valueMinus5Button->setMousePosition(m_mousePosition);
-		valueMinus10Button->setMousePosition(m_mousePosition);
-		valueMinus50Button->setMousePosition(m_mousePosition);
-		valueMinus100Button->setMousePosition(m_mousePosition);
-		valueMinus500Button->setMousePosition(m_mousePosition);
-		valueMinus1000Button->setMousePosition(m_mousePosition);
+		m_pValueMinus1Button->setMousePosition(m_mousePosition);
+		m_pValueMinus5Button->setMousePosition(m_mousePosition);
+		m_pValueMinus10Button->setMousePosition(m_mousePosition);
+		m_pValueMinus50Button->setMousePosition(m_mousePosition);
+		m_pValueMinus100Button->setMousePosition(m_mousePosition);
+		m_pValueMinus500Button->setMousePosition(m_mousePosition);
+		m_pValueMinus1000Button->setMousePosition(m_mousePosition);
 
-		valueMinus1Button->ButtonClick();
-		valueMinus5Button->ButtonClick();
-		valueMinus10Button->ButtonClick();
-		valueMinus50Button->ButtonClick();
-		valueMinus100Button->ButtonClick();
-		valueMinus500Button->ButtonClick();
-		valueMinus1000Button->ButtonClick();
+		m_pValueMinus1Button->ButtonClick();
+		m_pValueMinus5Button->ButtonClick();
+		m_pValueMinus10Button->ButtonClick();
+		m_pValueMinus50Button->ButtonClick();
+		m_pValueMinus100Button->ButtonClick();
+		m_pValueMinus500Button->ButtonClick();
+		m_pValueMinus1000Button->ButtonClick();
 
 	} else
 	{
-		dialogButton->setMousePosition(m_mousePosition);
-		dialogButton->ButtonClick();
+		m_pDialogButton->setMousePosition(m_mousePosition);
+		m_pDialogButton->ButtonClick();
 	}
 
 	
@@ -276,28 +276,28 @@ void Level1Scene::handleEvents()
 
 				//Event handler for all buttons
 				m_pSpinButton->setMouseButtonClicked(true);
-				resetButton->setMouseButtonClicked(true);
-				quitButton->setMouseButtonClicked(true);
+				m_pResetButton->setMouseButtonClicked(true);
+				m_pQuitButton->setMouseButtonClicked(true);
 				
-				value1Button->setMouseButtonClicked(true);
-				value5Button->setMouseButtonClicked(true);
-				value10Button->setMouseButtonClicked(true);
-				value50Button->setMouseButtonClicked(true);
-				value100Button->setMouseButtonClicked(true);
-				value500Button->setMouseButtonClicked(true);
-				value1000Button->setMouseButtonClicked(true);
+				m_pValue1Button->setMouseButtonClicked(true);
+				m_pValue5Button->setMouseButtonClicked(true);
+				m_pValue10Button->setMouseButtonClicked(true);
+				m_pValue50Button->setMouseButtonClicked(true);
+				m_pValue100Button->setMouseButtonClicked(true);
+				m_pValue500Button->setMouseButtonClicked(true);
+				m_pValue1000Button->setMouseButtonClicked(true);
 
-				valueMinus1Button->setMouseButtonClicked(true);
-				valueMinus5Button->setMouseButtonClicked(true);
-				valueMinus10Button->setMouseButtonClicked(true);
-				valueMinus50Button->setMouseButtonClicked(true);
-				valueMinus100Button->setMouseButtonClicked(true);
-				valueMinus500Button->setMouseButtonClicked(true);
-				valueMinus1000Button->setMouseButtonClicked(true);
+				m_pValueMinus1Button->setMouseButtonClicked(true);
+				m_pValueMinus5Button->setMouseButtonClicked(true);
+				m_pValueMinus10Button->setMouseButtonClicked(true);
+				m_pValueMinus50Button->setMouseButtonClicked(true);
+				m_pValueMinus100Button->setMouseButtonClicked(true);
+				m_pValueMinus500Button->setMouseButtonClicked(true);
+				m_pValueMinus1000Button->setMouseButtonClicked(true);
 
 
 
-				dialogButton->setMouseButtonClicked(true);
+				m_pDialogButton->setMouseButtonClicked(true);
 
 				break;
 			}
@@ -309,26 +309,26 @@ void Level1Scene::handleEvents()
 			case SDL_BUTTON_LEFT:
 				m_pSpinButton->setMouseButtonClicked(false);
 				
-				value1Button->setMouseButtonClicked(false);
-				value5Button->setMouseButtonClicked(false);
-				value10Button->setMouseButtonClicked(false);
-				value50Button->setMouseButtonClicked(false);
-				value100Button->setMouseButtonClicked(false);
-				value500Button->setMouseButtonClicked(false);
-				value1000Button->setMouseButtonClicked(false);
+				m_pValue1Button->setMouseButtonClicked(false);
+				m_pValue5Button->setMouseButtonClicked(false);
+				m_pValue10Button->setMouseButtonClicked(false);
+				m_pValue50Button->setMouseButtonClicked(false);
+				m_pValue100Button->setMouseButtonClicked(false);
+				m_pValue500Button->setMouseButtonClicked(false);
+				m_pValue1000Button->setMouseButtonClicked(false);
 
-				valueMinus1Button->setMouseButtonClicked(false);
-				valueMinus5Button->setMouseButtonClicked(false);
-				valueMinus10Button->setMouseButtonClicked(false);
-				valueMinus50Button->setMouseButtonClicked(false);
-				valueMinus100Button->setMouseButtonClicked(false);
-				valueMinus500Button->setMouseButtonClicked(false);
-				valueMinus1000Button->setMouseButtonClicked(false);
+				m_pValueMinus1Button->setMouseButtonClicked(false);
+				m_pValueMinus5Button->setMouseButtonClicked(false);
+				m_pValueMinus10Button->setMouseButtonClicked(false);
+				m_pValueMinus50Button->setMouseButtonClicked(false);
+				m_pValueMinus100Button->setMouseButtonClicked(false);
+				m_pValueMinus500Button->setMouseButtonClicked(false);
+				m_pValueMinus1000Button->setMouseButtonClicked(false);
 
-				resetButton->setMouseButtonClicked(false);
-				quitButton->setMouseButtonClicked(false);
+				m_pResetButton->setMouseButtonClicked(false);
+				m_pQuitButton->setMouseButtonClicked(false);
 				
-				dialogButton->setMouseButtonClicked(false);
+				m_pDialogButton->setMouseButtonClicked(false);
 
 				updateInfoLabels();
 

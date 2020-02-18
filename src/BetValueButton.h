@@ -14,7 +14,7 @@ public:
 	bool ButtonClick() override;
 private:
 	
-	int valueToChange;
+	int m_valueToChange;
 	bool m_isClicked;
 	
 	

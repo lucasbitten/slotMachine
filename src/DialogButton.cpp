@@ -24,7 +24,7 @@ bool DialogButton::ButtonClick()
         if (!m_isClicked)
         {
             TheSoundManager::Instance()->playSound("button", 0);
-            GameManager::Instance()->showingMessage = false;
+            GameManager::Instance()->isShowingMessage = false;
 
         }
         return true;

@@ -55,10 +55,15 @@ void GameManager::resetGame()
     lossNumber = 0;
     winRatio = 0;
     winRatioText.str("00.00%");
+    itemsResult[0] = ItemType::SPIN;
+    itemsResult[1] = ItemType::SPIN;
+    itemsResult[2] = ItemType::SPIN;
+    isWaitingAnimation = false;
+	
 }
 void GameManager::showMessageDialog(std::string messageLine1, std::string messageLine2)
 {
-    showingMessage = true;
+    isShowingMessage = true;
     messageContentLine1 = messageLine1;
     messageContentLine2 = messageLine2;
 }

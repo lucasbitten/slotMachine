@@ -8,7 +8,7 @@ BetValueButton::BetValueButton(int value)
 		"betValue" + std::to_string(value),
 		BET_VALUE_BUTTON, glm::vec2(400.0f, 300.0f)), m_isClicked(false)
 {
-	valueToChange = value;
+	m_valueToChange = value;
 }
 
 BetValueButton::~BetValueButton()
@@ -25,7 +25,7 @@ bool BetValueButton::ButtonClick()
             TheSoundManager::Instance()->playSound("button", 0);
 
 
-            GameManager::Instance()->playerBet += valueToChange;
+            GameManager::Instance()->playerBet += m_valueToChange;
             if (GameManager::Instance()->playerBet < 0)
             {
                 GameManager::Instance()->playerBet = 0;

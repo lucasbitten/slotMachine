@@ -45,7 +45,7 @@ bool SpinButton::ButtonClick()
             }
             else if (GameManager::Instance()->playerBet <= GameManager::Instance()->playerMoney) {
 
-                TheGameManager::Instance()->waitingAnimation = true;
+                TheGameManager::Instance()->isWaitingAnimation = true;
 
             	GameManager::Instance()->spinResult = GameManager::Instance()-> reels();
                 GameManager::Instance()->fruits = GameManager::Instance()->spinResult[0] + " - " + GameManager::Instance()->spinResult[1] + " - " + GameManager::Instance()->spinResult[2];
